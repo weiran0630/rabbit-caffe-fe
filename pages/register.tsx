@@ -1,9 +1,9 @@
-import RegisterForm from '@/components/RegisterForm';
+import RegisterForm from '@/components/form/register/RegisterForm';
 import styled from '@emotion/styled';
 import Head from 'next/head';
 import React from 'react';
 
-export default function login() {
+export default function Login() {
 	return (
 		<>
 			<Head>

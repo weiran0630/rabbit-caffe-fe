@@ -3,8 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 
-import ButtonLink from '@/components/ButtonLink';
-import Modal from '@/components/Modal';
+import ButtonLink from '@/components/common/ButtonLink';
 
 const Home: NextPage = () => {
 	return (

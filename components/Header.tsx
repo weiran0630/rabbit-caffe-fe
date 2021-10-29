@@ -3,13 +3,15 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { SiRabbitmq } from 'react-icons/si';
 import { RiShoppingCartLine } from 'react-icons/ri';
+import { useSession } from 'next-auth/client';
 
 export default function Header() {
+	const [session, loading] = useSession();
+
 	return (
 		<Container>
 			<HeaderStyled>
-				{/* placeholder */}
-				<div style={{ visibility: 'hidden', padding: '0.5rem' }}>
+				<div className='hidden'>
 					<RiShoppingCartLine size={30} />
 				</div>
 
@@ -35,9 +37,15 @@ export default function Header() {
 					<span>所有商品</span>
 				</Link>
 
-				<Link href='/login' passHref>
-					<span>加入會員/登錄</span>
-				</Link>
+				{session ? (
+					<Link href='/member' passHref>
+						<span>會員專區</span>
+					</Link>
+				) : (
+					<Link href='/login' passHref>
+						<span>加入會員/登錄</span>
+					</Link>
+				)}
 			</Nav>
 		</Container>
 	);
@@ -84,6 +92,11 @@ const HeaderStyled = styled.div`
 			font-size: 2rem;
 		}
 	}
+
+	.hidden {
+		visibility: hidden;
+		padding: 0.5rem;
+	}
 `;
 
 const Nav = styled.nav`
@@ -96,7 +109,7 @@ const Nav = styled.nav`
 		display: inline-block;
 		padding: 3px 10px 5px 10px;
 		border-radius: 8px;
-		transition: all 0.1s ease-in-out;
+		transition: all 0.15s ease-in-out;
 
 		&:hover {
 			color: white;
@@ -115,7 +128,7 @@ const Cart = styled.div`
 	top: 0.5rem;
 	padding: 0.5rem;
 	border-radius: 10px;
-	transition: all 0.1s ease-in-out;
+	transition: all 0.15s ease-in-out;
 
 	&:hover {
 		background-color: #553a32;

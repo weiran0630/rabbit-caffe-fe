@@ -1,29 +1,43 @@
-import LoginForm from '@/components/LoginForm';
+import LoginForm from '@/components/form/login/LoginForm';
 import styled from '@emotion/styled';
+import { getSession } from 'next-auth/client';
+
 import Head from 'next/head';
 import React from 'react';
 
-export default function login() {
+export default function Login() {
 	return (
-		<>
+		<Container>
 			<Head>
 				<title>Rabbit Caffee | 登入</title>
 				{/* <meta name='description' content='' /> */}
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Container>
-				<div className='content'>
-					<LoginForm />
-				</div>
-			</Container>
-		</>
+			<div className='content'>
+				<LoginForm />
+			</div>
+		</Container>
 	);
+}
+
+export async function getServerSideProps(context: any) {
+	const session = await getSession(context);
+
+	if (session) {
+		return {
+			redirect: {
+				destination: '/member',
+				permanent: false,
+			},
+		};
+	}
+	return { props: { session } };
 }
 
 const Container = styled.div`
 	width: 100vw;
-	height: 55vh;
+	height: 70vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
