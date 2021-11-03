@@ -9,10 +9,10 @@ export default function usePaginatedProducts() {
 			return null;
 		}
 		if (pageIndex === 0) {
-			return `/beans?_limit=10`;
+			return `/products?_limit=10`;
 		}
 		if (previousPageData) {
-			return `/beans?_start=${
+			return `/products?_start=${
 				previousPageData[previousPageData.length - 1].id
 			}&_limit=10`;
 		}
