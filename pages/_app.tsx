@@ -1,35 +1,26 @@
+import React, { useContext, useState } from 'react';
 import type { AppProps } from 'next/app';
-import Image from 'next/image';
-// import { QueryClientProvider, QueryClient } from 'react-query';
-// import { ReactQueryDevtools } from 'react-query/devtools';
-import { Provider } from 'next-auth/client';
+import { Provider as AuthProvider } from 'next-auth/client';
 
 import GlobalStyles from '../styles/GlobalStyles';
 import Header from '@/components/Header';
-
-// const queryClient = new QueryClient();
+import {
+	FilterContext,
+	filterContextDefaultValue,
+} from 'context/FilterContext';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+	const [filter, setFilter] = useState(filterContextDefaultValue.filter);
+
 	return (
 		<>
-			<Provider session={pageProps.session}>
-				{/*<QueryClientProvider client={queryClient}>*/}
-				<GlobalStyles />
-				<Image
-					className='bg'
-					src='/images/bg.jpg'
-					alt='background'
-					layout='fill'
-				/>
-
-				<div className='container'>
+			<GlobalStyles />
+			<AuthProvider session={pageProps.session}>
+				<FilterContext.Provider value={{ filter, setFilter }}>
 					<Header />
 					<Component {...pageProps} />
-				</div>
-
-				{/* <ReactQueryDevtools initialIsOpen={false} /> */}
-				{/*</QueryClientProvider>*/}
-			</Provider>
+				</FilterContext.Provider>
+			</AuthProvider>
 		</>
 	);
 }

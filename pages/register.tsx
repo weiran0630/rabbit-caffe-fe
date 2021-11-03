@@ -1,7 +1,8 @@
-import RegisterForm from '@/components/form/register/RegisterForm';
-import styled from '@emotion/styled';
-import Head from 'next/head';
 import React from 'react';
+import Head from 'next/head';
+import styled from '@emotion/styled';
+
+import RegisterForm from '@/components/form/register/RegisterForm';
 
 export default function Login() {
 	return (
@@ -30,14 +31,14 @@ const Container = styled.div`
 	align-items: center;
 
 	.content {
-		width: 50vw;
+		width: 30vw;
 		padding: 2rem;
-		border: 1px solid #a7a7a745;
-		border-radius: 8px;
-		background-color: #fefefef0;
-		box-shadow: 0px 1px 3px 0px #0000000f;
+		border: 1px solid #e9e9e9ab;
+		border-radius: 4px;
+		background-color: #fefefedf;
+		box-shadow: 0px 1px 3px 0px #0000000e;
 
-		@media (max-width: 679px) {
+		@media (max-width: 520px) {
 			width: 100%;
 		}
 	}

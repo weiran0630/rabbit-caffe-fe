@@ -145,7 +145,9 @@ const Others = styled.div`
 const buttonConfig = {
 	color: '#575757',
 	fontSize: '1rem',
-	borderRadius: '8px',
-	boxShadow: '0 1px 2px 0.2px rgba(0, 0, 0, 0.3)',
+	border: '1px solid #a7a7a778',
+	borderRadius: '6px',
+	backgroundColor: '#fefefe',
+	boxShadow: '0px 1px 1px 1px #00000018',
 	transition: 'all 0.15s ease-in-out',
 };

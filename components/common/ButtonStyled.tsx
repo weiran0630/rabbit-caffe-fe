@@ -16,8 +16,8 @@ export const ButtonStyled = styled.span<ButtonStyledProps>`
 	width: max-content;
 	height: max-content;
 	padding: 10px 25px;
-	border-radius: 8px;
-	box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
+	border-radius: 6px;
+	box-shadow: 0px 1px 1px 1px #00000018;
 	background-color: ${({ isLoading, isDisable }) =>
 		isLoading || isDisable ? '#acacac' : '#533a32'};
 	filter: ${({ isLoading, isDisable }) =>

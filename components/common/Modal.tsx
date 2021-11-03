@@ -60,8 +60,9 @@ const CloseButton = styled.div`
 const ModalContent = styled.div`
 	position: relative;
 	background-color: #fefefe;
-	box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 1px 3px 1px #00000018;
 	padding: 2rem;
-	width: 60%;
-	border-radius: 8px;
+	width: 30rem;
+
+	border-radius: 4px;
 `;

@@ -1,20 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import { SiRabbitmq } from 'react-icons/si';
-import { RiShoppingCartLine } from 'react-icons/ri';
 import { useSession } from 'next-auth/client';
+import { SiRabbitmq } from 'react-icons/si';
+import {
+	IoPersonCircleSharp,
+	IoHomeSharp,
+	IoCafeSharp,
+	IoCartSharp,
+} from 'react-icons/io5';
+import ProductHeader from './product/ProductHeader';
 
 export default function Header() {
-	const [session, loading] = useSession();
+	const router = useRouter();
+	const [session, _] = useSession();
 
 	return (
 		<Container>
 			<HeaderStyled>
-				<div className='hidden'>
-					<RiShoppingCartLine size={30} />
-				</div>
-
 				<h1>
 					Ra
 					<span>
@@ -22,31 +26,46 @@ export default function Header() {
 					</span>
 					it Caffe
 				</h1>
-
-				<Cart>
-					<RiShoppingCartLine size={30} />
-				</Cart>
 			</HeaderStyled>
 
 			<Nav>
 				<Link href='/' passHref>
-					<span>主頁</span>
+					<span className='clickable'>
+						<IoHomeSharp className='logo' size={20} />
+						<span>主頁</span>
+					</span>
 				</Link>
 
-				<Link href='/product' passHref>
-					<span>所有商品</span>
+				<Link href='/products' passHref>
+					<span className='clickable'>
+						<IoCafeSharp size={20} />
+						<span>所有商品</span>
+					</span>
 				</Link>
 
 				{session ? (
 					<Link href='/member' passHref>
-						<span>會員專區</span>
+						<span className='clickable'>
+							<IoPersonCircleSharp size={20} />
+							<span>會員專區</span>
+						</span>
 					</Link>
 				) : (
 					<Link href='/login' passHref>
-						<span>加入會員/登錄</span>
+						<span className='clickable'>
+							<IoPersonCircleSharp size={20} />
+							<span>加入會員/登錄</span>
+						</span>
 					</Link>
 				)}
+
+				<span className='clickable'>
+					<IoCartSharp size={20} />
+					<span>購物車</span>
+				</span>
 			</Nav>
+
+			{router.pathname.includes('/products') && <ProductHeader />}
 		</Container>
 	);
 }
@@ -55,28 +74,27 @@ const Container = styled.header`
 	width: 100vw;
 	position: sticky;
 	top: 0;
-	z-index: 1;
-	padding: 2rem 0rem;
+	z-index: 3;
+	padding-top: 1rem;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
-	background-color: #fefefef0;
-	box-shadow: 0px 1px 3px 4px rgba(0, 0, 0, 0.1);
+	background-color: #fefefee0;
+	backdrop-filter: blur(8px);
+	box-shadow: 0px 1px 3px 1px #00000018;
 
 	@media (max-width: 728px) {
 		background-color: #fefefe;
-	}
-	@media (max-width: 384px) {
-		padding: 1rem 0rem;
 	}
 `;
 
 const HeaderStyled = styled.div`
 	width: 100%;
-	padding: 0 5vw;
+	padding: 0 5vw 1rem 5vw;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 
 	h1 {
 		user-select: none;
@@ -89,7 +107,7 @@ const HeaderStyled = styled.div`
 		}
 
 		@media (max-width: 384px) {
-			font-size: 2rem;
+			font-size: 2.5rem;
 		}
 	}
 
@@ -102,36 +120,33 @@ const HeaderStyled = styled.div`
 const Nav = styled.nav`
 	display: flex;
 	gap: 1.2rem;
+	padding-bottom: 1rem;
 
-	span {
+	.clickable {
 		user-select: none;
 		cursor: pointer;
-		display: inline-block;
+		display: inline-flex;
+		gap: 0.5rem;
+		align-items: center;
 		padding: 3px 10px 5px 10px;
 		border-radius: 8px;
-		transition: all 0.15s ease-in-out;
+		transition: all 0.15s ease-in;
 
 		&:hover {
 			color: white;
 			background-color: #533a32;
 		}
+
+		@media (max-width: 559px) {
+			padding: 10px;
+			span {
+				display: none;
+			}
+		}
 	}
-`;
-
-const Cart = styled.div`
-	cursor: pointer;
-	height: max-content;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	top: 0.5rem;
-	padding: 0.5rem;
-	border-radius: 10px;
-	transition: all 0.15s ease-in-out;
-
-	&:hover {
-		background-color: #553a32;
-		color: white;
+	@media (max-width: 559px) {
+		width: 100%;
+		justify-content: space-between;
+		padding: 0 3rem 1rem 3rem;
 	}
 `;

@@ -17,20 +17,21 @@ export default function GlobalStyles() {
 				body {
 					font-family: 'Noto Sans TC', sans-serif;
 					color: #533a32;
+					min-height: 100vh;
+					background-image: url('/images/bg.jpg');
+					background-repeat: no-repeat;
+					background-attachment: fixed;
+					backdrop-filter: contrast(1.2) blur(5px) saturate(0.1);
 				}
 
-				.bg {
-					opacity: 0.2;
-					z-index: -1;
-				}
-
-				.hero-image {
+				.hero-image,
+				.product-image {
 					object-fit: cover;
 				}
 
-				.container {
-					position: relative;
-					z-index: 1;
+				.product-image {
+					border-top-left-radius: 4px;
+					border-top-right-radius: 4px;
 				}
 			`}
 		/>
