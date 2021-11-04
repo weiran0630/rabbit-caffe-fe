@@ -11,7 +11,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-	console.log(product);
+	// console.log(product);
 
 	return (
 		<Card>

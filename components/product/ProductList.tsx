@@ -1,31 +1,39 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
+import useSWRInfinite from 'swr/infinite';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import ProductCard from './ProductCard';
-import usePaginatedProducts from 'hooks/usePaginatedProducts';
+import fetcher from 'utils/fetcher';
+import getKey from 'utils/getKey';
 import useFilteredProducts from 'hooks/useFilteredProducts';
+import { IProduct } from 'models/interfaces';
+import ProductCard from './ProductCard';
 
-export default function ProductList() {
-	const { data: products, setSize, size } = usePaginatedProducts();
-	const filteredProducts = useFilteredProducts(products);
+interface ProductListProps {
+	initialData: IProduct[];
+}
+
+export default function ProductList({ initialData }: ProductListProps) {
+	const { data, setSize, size } = useSWRInfinite<IProduct[]>(getKey, fetcher, {
+		fallbackData: [initialData],
+	});
+	const allProducts = useMemo(() => data?.flat(), [data]);
+	const filteredProducts = useFilteredProducts(allProducts);
 
 	return (
 		<Container>
-			{filteredProducts?.length ? (
+			{filteredProducts?.length && (
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
 					scrollThreshold={0.5}
 					next={() => setSize(size + 1)}
-					hasMore={!!products}
+					hasMore={!!data}
 					loader={null}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}
 				</InfiniteScroll>
-			) : (
-				<p>暫時沒有商品</p>
 			)}
 		</Container>
 	);
