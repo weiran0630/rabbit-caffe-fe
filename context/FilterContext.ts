@@ -5,10 +5,10 @@ import { IFilter } from 'models/interfaces';
 export const filterContextDefaultValue = {
 	filter: {
 		searchTerm: '',
-		companyId: '',
-		roastLevelId: '',
-		categoryId: '',
-		placeOriginId: '',
+		companyId: null,
+		roastLevelId: null,
+		categoryId: null,
+		placeOriginId: null,
 	} as IFilter,
 	setFilter: (filter: IFilter) => {},
 };

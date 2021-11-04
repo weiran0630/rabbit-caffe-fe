@@ -133,9 +133,9 @@ export interface IProduct {
 }
 
 export interface IFilter {
-	searchTerm?: string;
-	categoryId?: number;
-	companyId?: number;
-	placeOriginId?: number;
-	roastLevelId?: number;
+	searchTerm: string;
+	categoryId: number | null;
+	companyId: number | null;
+	placeOriginId: number | null;
+	roastLevelId: number | null;
 }
