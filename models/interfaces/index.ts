@@ -1,9 +1,95 @@
-export interface Formats {}
+export interface ICategory {
+	id: number;
+	cate_name: string;
+	product: number;
+	created_at: Date;
+	updated_at: Date;
+	cate_image?: any;
+}
 
-export interface ProviderMetadata {}
+export interface ICompany {
+	id: number;
+	com_name: string;
+	product: number;
+	created_at: Date;
+	updated_at: Date;
+}
+
+export interface IRoastLevel {
+	id: number;
+	level: string;
+	product: number;
+	created_at: Date;
+	updated_at: Date;
+}
+
+export interface ProviderMetadata {
+	public_id: string;
+	resource_type: string;
+}
+
+export interface Small {
+	ext: string;
+	url: string;
+	hash: string;
+	mime: string;
+	name: string;
+	path?: any;
+	size: number;
+	width: number;
+	height: number;
+	provider_metadata: ProviderMetadata;
+}
+
+export interface ProviderMetadata2 {
+	public_id: string;
+	resource_type: string;
+}
+
+export interface Thumbnail {
+	ext: string;
+	url: string;
+	hash: string;
+	mime: string;
+	name: string;
+	path?: any;
+	size: number;
+	width: number;
+	height: number;
+	provider_metadata: ProviderMetadata2;
+}
+
+export interface ProviderMetadata3 {
+	public_id: string;
+	resource_type: string;
+}
+
+export interface Medium {
+	ext: string;
+	url: string;
+	hash: string;
+	mime: string;
+	name: string;
+	path?: any;
+	size: number;
+	width: number;
+	height: number;
+	provider_metadata: ProviderMetadata3;
+}
+
+export interface Formats {
+	small: Small;
+	thumbnail: Thumbnail;
+	medium: Medium;
+}
+
+export interface ProviderMetadata4 {
+	public_id: string;
+	resource_type: string;
+}
 
 export interface IImage {
-	id: string;
+	id: number;
 	name: string;
 	alternativeText: string;
 	caption: string;
@@ -15,65 +101,41 @@ export interface IImage {
 	mime: string;
 	size: number;
 	url: string;
-	previewUrl: string;
+	previewUrl?: any;
 	provider: string;
-	provider_metadata: ProviderMetadata;
-	related: string;
-	created_by: string;
-	updated_by: string;
+	provider_metadata: ProviderMetadata4;
+	created_at: Date;
+	updated_at: Date;
 }
 
 export interface IPlaceOrigin {
-	id: string;
+	id: number;
 	place_name: string;
-	published_at: string;
-	created_by: string;
-	updated_by: string;
-}
-
-export interface IRoastLevel {
-	id: string;
-	level: string;
-	published_at: string;
-	created_by: string;
-	updated_by: string;
-}
-
-export interface ICategory {
-	id: string;
-	cate_name: string;
-	cate_image: IImage;
-	published_at: string;
-	created_by: string;
-	updated_by: string;
-}
-
-export interface ICompany {
-	id: string;
-	com_name: string;
-	published_at: string;
-	created_by: string;
-	updated_by: string;
+	product?: number;
+	created_at: Date;
+	updated_at: Date;
 }
 
 export interface IProduct {
-	id: string;
+	id: number;
 	title: string;
+	price: number;
 	unit: string;
 	description: string;
-	price: number;
-	image: IImage[];
-	place_origin: IPlaceOrigin;
-	roast_level: IRoastLevel;
 	category: ICategory;
 	company: ICompany;
-	published_at: Date;
+	place_origin?: number;
+	roast_level: IRoastLevel;
+	created_at: Date;
+	updated_at: Date;
+	image: IImage[];
+	place_origins: IPlaceOrigin[];
 }
 
 export interface IFilter {
 	searchTerm?: string;
-	categoryId?: string;
-	companyId?: string;
-	placeOriginId?: string;
-	roastLevelId?: string;
+	categoryId?: number;
+	companyId?: number;
+	placeOriginId?: number;
+	roastLevelId?: number;
 }

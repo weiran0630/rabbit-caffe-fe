@@ -16,7 +16,7 @@ export default function ProductList() {
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
-					scrollThreshold={0.3}
+					scrollThreshold={0.5}
 					next={() => setSize(size + 1)}
 					hasMore={!!products}
 					loader={null}>
@@ -33,6 +33,7 @@ export default function ProductList() {
 
 const Container = styled.div`
 	width: 100%;
+	min-height: 100vh;
 	display: flex;
 
 	.inf-scroll {

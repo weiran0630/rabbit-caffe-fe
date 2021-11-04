@@ -4,17 +4,17 @@ import { useMemo } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
 export default function usePaginatedProducts() {
-	const getKey = (pageIndex: number, previousPageData: IProduct[] | null) => {
+	const getKey = (pageIndex: number, previousPageData: any) => {
 		if (previousPageData && !previousPageData.length) {
 			return null;
 		}
 		if (pageIndex === 0) {
-			return `/products?_limit=10`;
+			return '/products?_limit=5&_sort=id';
 		}
 		if (previousPageData) {
 			return `/products?_start=${
 				previousPageData[previousPageData.length - 1].id
-			}&_limit=10`;
+			}&_limit=5&_sort=id`;
 		}
 		return null;
 	};
@@ -32,7 +32,7 @@ export default function usePaginatedProducts() {
 	});
 
 	return {
-		data: allProducts?.flat(),
+		data: useMemo(() => allProducts?.flat(), [allProducts]),
 		isValidating,
 		setSize,
 		size,

@@ -11,13 +11,15 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+	console.log(product);
+
 	return (
 		<Card>
 			<div className='top'>
 				<ImageContainer>
 					<Image
 						className='product-image'
-						src={`${process.env.NEXT_PUBLIC_API_URL}${product.image[0].url}`}
+						src={product.image[0].url}
 						layout='fill'
 						alt='product image'
 					/>

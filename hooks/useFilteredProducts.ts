@@ -23,8 +23,10 @@ export default function useFilteredProducts(
 		);
 	}
 	if (placeOriginId) {
-		filteredProducts = filteredProducts.filter(
-			product => product.place_origin.id === placeOriginId
+		filteredProducts = filteredProducts.filter(product =>
+			product.place_origins.filter(
+				placeOrigin => placeOrigin.id === placeOriginId
+			)
 		);
 	}
 	if (roastLevelId) {
