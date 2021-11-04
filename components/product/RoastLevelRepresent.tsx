@@ -13,7 +13,7 @@ export default function RoastLevelRepresent({
 	const roastColor = ['#f2c088', '#e59c4f', '#a76a32', '#5d341a', '#30170f'];
 
 	let circleArr = [];
-	for (let i = 0; i <= parseInt(roastLevel.id) - 1; i++) {
+	for (let i = 0; i <= roastLevel.id - 1; i++) {
 		circleArr.push(<Circle color={roastColor[i]} key={i} />);
 	}
 
