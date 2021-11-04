@@ -8,6 +8,7 @@ import getKey from 'utils/getKey';
 import useFilteredProducts from 'hooks/useFilteredProducts';
 import { IProduct } from 'models/interfaces';
 import ProductCard from './ProductCard';
+import Loader from '../common/Loader';
 
 interface ProductListProps {
 	initialData: IProduct[];
@@ -15,10 +16,14 @@ interface ProductListProps {
 
 export default function ProductList({ initialData }: ProductListProps) {
 	const { data, setSize, size } = useSWRInfinite<IProduct[]>(getKey, fetcher, {
-		fallbackData: [initialData],
+		initialSize: 1,
+		revalidateOnFocus: false,
 	});
-	const allProducts = useMemo(() => data?.flat(), [data]);
-	const filteredProducts = useFilteredProducts(allProducts);
+
+	const products = data ? initialData.concat(...data) : initialData;
+	const isEmpty = data?.[0]?.length === 0;
+	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 5);
+	const filteredProducts = useFilteredProducts(products);
 
 	return (
 		<Container>
@@ -26,10 +31,14 @@ export default function ProductList({ initialData }: ProductListProps) {
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
-					scrollThreshold={0.5}
 					next={() => setSize(size + 1)}
-					hasMore={!!data}
-					loader={null}>
+					hasMore={!isReachingEnd}
+					loader={
+						<div className='loader'>
+							<Loader />
+						</div>
+					}
+					endMessage={<p className='loader'>已列出所有商品</p>}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}
@@ -49,5 +58,12 @@ const Container = styled.div`
 		flex-wrap: wrap;
 		gap: 1rem;
 		padding: 1rem;
+
+		.loader {
+			color: #a5a5a58f;
+			width: 100vw;
+			display: flex;
+			justify-content: center;
+		}
 	}
 `;

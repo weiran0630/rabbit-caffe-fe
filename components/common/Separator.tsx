@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Separator = styled.div`
 	cursor: default;
-	color: #a5a5a5;
+	color: #a5a5a58f;
 	margin-top: 2rem;
 	font-size: 0.8rem;
 	display: flex;

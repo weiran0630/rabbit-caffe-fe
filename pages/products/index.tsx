@@ -18,16 +18,14 @@ export const getStaticProps: GetStaticProps = async () => {
 				'/products?_limit=5&_sort=id': products,
 				'/categories': categories,
 			},
-			initialData: {
-				products,
-			},
+			products,
 		},
 	};
 };
 
 export default function Products({
 	fallback,
-	initialData,
+	products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 	return (
 		<>
@@ -39,7 +37,7 @@ export default function Products({
 
 			<Container>
 				<SWRConfig value={{ fallback }}>
-					<ProductList initialData={initialData.products} />
+					<ProductList initialData={products} />
 				</SWRConfig>
 			</Container>
 		</>
