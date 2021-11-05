@@ -31,7 +31,7 @@ const Container = styled.div`
 	align-items: center;
 
 	.content {
-		width: 30vw;
+		width: 30rem;
 		padding: 2rem;
 		border: 1px solid #e9e9e9ab;
 		border-radius: 4px;

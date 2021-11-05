@@ -1,9 +1,10 @@
 import React from 'react';
 import { getSession, useSession } from 'next-auth/client';
+import { signOut } from 'next-auth/client';
 
 export default function Member() {
 	const [session, loading] = useSession();
-	return <div>{session?.user?.email}</div>;
+	return <div onClick={() => signOut()}>{session?.user?.email}</div>;
 }
 
 export async function getServerSideProps(context: any) {

@@ -7,17 +7,19 @@ import LoginForm from '@/components/form/login/LoginForm';
 
 export default function Login() {
 	return (
-		<Container>
+		<>
 			<Head>
 				<title>Rabbit Caffee | 登入</title>
 				{/* <meta name='description' content='' /> */}
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<div className='content'>
-				<LoginForm />
-			</div>
-		</Container>
+			<Container>
+				<div className='content'>
+					<LoginForm />
+				</div>
+			</Container>
+		</>
 	);
 }
 

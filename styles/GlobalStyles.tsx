@@ -28,10 +28,12 @@ export default function GlobalStyles() {
 				.product-image {
 					object-fit: cover;
 				}
-
 				.product-image {
 					border-top-left-radius: 4px;
 					border-top-right-radius: 4px;
+				}
+				.product-detail {
+					object-fit: contain;
 				}
 			`}
 		/>

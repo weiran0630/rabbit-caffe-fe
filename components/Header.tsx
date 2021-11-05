@@ -65,7 +65,7 @@ export default function Header() {
 				</span>
 			</Nav>
 
-			{router.pathname.includes('/products') && <ProductHeader />}
+			{router.pathname.match(/\/products$/) && <ProductHeader />}
 		</Container>
 	);
 }

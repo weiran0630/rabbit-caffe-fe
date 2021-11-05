@@ -2,6 +2,10 @@
 module.exports = {
 	reactStrictMode: true,
 	images: {
-		domains: ['res.cloudinary.com', 'rabbit-caffe-be.herokuapp.com'],
+		domains: [
+			'res.cloudinary.com',
+			'rabbit-caffe-be.herokuapp.com',
+			'localhost',
+		],
 	},
 };

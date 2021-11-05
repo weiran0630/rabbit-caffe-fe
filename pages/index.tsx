@@ -1,50 +1,61 @@
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import imgSrc from 'public/images/hero-image.jpg';
 
 import ButtonLink from '@/components/common/ButtonLink';
+import { useEffect } from 'react';
 
 const Home: NextPage = () => {
+	const router = useRouter();
+
+	useEffect(() => {
+		router.prefetch('/login');
+		router.prefetch('/register');
+	}, [router]);
+
 	return (
-		<MainStyled>
+		<>
 			<Head>
 				<title>Rabbit Caffee | 主頁</title>
 				{/* <meta name='description' content='' /> */}
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Section>
-				<div>
-					<h2>
-						{"Today's"}
-						<br />
-						GOOD MOOD
-						<br />
-						proudly
-						<br />
-						sponsored by
-						<br />
-						GOOD COFFEE
-					</h2>
+			<MainStyled>
+				<Section>
+					<div>
+						<h2>
+							{"Today's"}
+							<br />
+							GOOD MOOD
+							<br />
+							proudly
+							<br />
+							sponsored by
+							<br />
+							GOOD COFFEE
+						</h2>
 
-					<ButtonLink href='/products'>開始探索</ButtonLink>
-				</div>
-			</Section>
+						<ButtonLink href='/products'>開始探索</ButtonLink>
+					</div>
+				</Section>
 
-			<ImageContainer>
-				<Image
-					className='hero-image'
-					src={imgSrc}
-					alt=' '
-					layout='fill'
-					quality='25'
-					placeholder='blur'
-					priority
-				/>
-			</ImageContainer>
-		</MainStyled>
+				<ImageContainer>
+					<Image
+						className='hero-image'
+						src={imgSrc}
+						alt=' '
+						layout='fill'
+						quality='25'
+						placeholder='blur'
+						priority
+					/>
+				</ImageContainer>
+			</MainStyled>
+		</>
 	);
 };
 
@@ -60,7 +71,7 @@ const MainStyled = styled.div`
 	}
 `;
 
-const Section = styled.div`
+const Section = styled.section`
 	width: 50%;
 	height: 70%;
 	display: flex;

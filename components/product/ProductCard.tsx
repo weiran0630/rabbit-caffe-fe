@@ -5,25 +5,30 @@ import { IoPricetagSharp } from 'react-icons/io5';
 
 import { IProduct } from 'models/interfaces';
 import RoastLevelRepresent from './RoastLevelRepresent';
+import { useRouter } from 'next/router';
 
 interface ProductCardProps {
 	product: IProduct;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-	// console.log(product);
+	const router = useRouter();
 
 	return (
-		<Card>
+		<Card onClick={() => router.push(`/products/${product.id}`)}>
 			<div className='top'>
-				<ImageContainer>
+				<div className='img-container'>
 					<Image
 						className='product-image'
-						src={product.image[0].url}
+						src={
+							process.env.NODE_ENV === 'development'
+								? process.env.NEXT_PUBLIC_API_URL + product.image[0].url
+								: product.image[0].url
+						}
 						layout='fill'
 						alt='product image'
 					/>
-				</ImageContainer>
+				</div>
 				<h4>{product.title}</h4>
 			</div>
 
@@ -38,6 +43,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 }
 
 const Card = styled.div`
+	cursor: pointer;
 	width: 15rem;
 	display: flex;
 	flex-direction: column;
@@ -53,6 +59,11 @@ const Card = styled.div`
 		gap: 0.5rem;
 		margin-bottom: 1rem;
 		overflow: hidden;
+
+		.img-container {
+			position: relative;
+			aspect-ratio: 1 / 1;
+		}
 
 		h4 {
 			font-variant: small-caps;
@@ -70,9 +81,4 @@ const Card = styled.div`
 			font-weight: 700;
 		}
 	}
-`;
-
-const ImageContainer = styled.div`
-	position: relative;
-	aspect-ratio: 1 / 1;
 `;
