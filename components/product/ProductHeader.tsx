@@ -39,11 +39,17 @@ const Container = styled.div`
 	gap: 0.5rem;
 
 	.clickable {
+		display: block;
+		padding: 0.5rem;
+		margin-bottom: 0.5rem;
+		padding: 4px 10px 5px 12px;
+		border-radius: 8px;
 		user-select: none;
 		cursor: pointer;
 
 		&.active {
-			font-weight: 700;
+			color: white;
+			background-color: #533a32;
 		}
 	}
 `;

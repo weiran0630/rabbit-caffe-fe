@@ -54,14 +54,17 @@ const Container = styled.div`
 	display: flex;
 
 	.inf-scroll {
+		width: 100vw;
 		display: flex;
+		justify-content: center;
 		flex-wrap: wrap;
 		gap: 1rem;
-		padding: 1rem;
+		padding: 2rem;
 
 		.loader {
+			margin: 2rem;
 			color: #a5a5a58f;
-			width: 100vw;
+			width: 100%;
 			display: flex;
 			justify-content: center;
 		}

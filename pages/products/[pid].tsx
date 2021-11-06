@@ -70,15 +70,16 @@ export default function ProductDetailsPage({
 						/>
 					</div>
 				</ImageContainer>
+
 				<Section>
 					<Info>
 						<h2 className='title'>{product.title}</h2>
 						<h3 className='company'>{product.company.com_name}</h3>
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
 						<h2 className='price'>$ {product.price}</h2>
-						<h4>商品描述：</h4>
-						<Markdown className='description'>{product.description}</Markdown>
 						<ButtonStyled>加入購物車</ButtonStyled>
+						<h4 className='description'>商品描述：</h4>
+						<Markdown className='actual-desc'>{product.description}</Markdown>
 					</Info>
 				</Section>
 			</MainStyled>
@@ -88,51 +89,77 @@ export default function ProductDetailsPage({
 
 const MainStyled = styled.main`
 	width: 100vw;
-	height: 70%;
 	display: flex;
-	align-items: center;
+	flex-wrap: wrap;
+	padding: 3rem 3rem;
+
+	@media (max-width: 1457px) {
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
 `;
 
 const Section = styled.section`
 	width: 50%;
-	height: 70%;
 	display: flex;
+	justify-content: center;
+	padding: 3rem;
+
+	@media (max-width: 1457px) {
+		width: 100%;
+	}
+
+	@media (max-width: 700px) {
+		padding: 0;
+	}
 `;
 
 const ImageContainer = styled.div`
-	position: relative;
+	display: flex;
+	justify-content: center;
 	width: 50%;
-	height: 100vh;
+	height: 70%;
 
 	div {
-		padding: 10rem;
+		width: 40rem;
+	}
+
+	@media (max-width: 1457px) {
+		width: 100%;
 	}
 `;
 
 const Info = styled.div`
 	display: flex;
 	flex-direction: column;
-	margin-top: -7rem;
 
 	.title,
 	.price {
-		font-size: 2rem;
+		font-size: 2.5rem;
+
+		@media (max-width: 700px) {
+			font-size: 2rem;
+		}
 	}
 
 	.company {
 		color: #858585;
 		font-family: 'Staatliches';
 		margin-top: 0.5rem;
-		font-size: 1.5rem;
+		font-size: 2rem;
 	}
 
 	.price {
-		margin: 1rem 0;
+		margin: 1rem 0 2rem 0;
 	}
 
 	.description {
+		margin-top: 2rem;
+	}
+	.actual-desc {
 		color: #858585;
 		font-size: 0.9rem;
-		margin-bottom: 2rem;
+		/* margin-bottom: 2rem; */
 	}
 `;

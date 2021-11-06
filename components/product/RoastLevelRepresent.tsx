@@ -38,6 +38,7 @@ const Container = styled.div<SpanProps>`
 	gap: 0.1rem;
 
 	span {
+		color: #858585;
 		font-size: ${props => (props.detail ? '1rem' : '0.8rem')};
 		margin-left: 0.2rem;
 	}
