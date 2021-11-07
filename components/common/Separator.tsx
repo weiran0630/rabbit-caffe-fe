@@ -1,9 +1,13 @@
 import styled from '@emotion/styled';
 
-export const Separator = styled.div`
+interface SeparatorProps {
+	primary?: boolean;
+}
+
+export const Separator = styled.div<SeparatorProps>`
 	cursor: default;
 	color: #a5a5a58f;
-	margin-top: 2rem;
+	/* margin-top: 2rem; */
 	font-size: 0.8rem;
 	display: flex;
 	align-items: center;
@@ -13,7 +17,8 @@ export const Separator = styled.div`
 	&::after {
 		content: '';
 		flex: 1;
-		border-bottom: 1px solid #a5a5a58f;
+		border-bottom: ${props => (props.primary ? '2px' : '1px')} solid
+			${props => (props.primary ? '#6868688f' : '#a5a5a58f')};
 	}
 
 	&:not(:empty)::before {

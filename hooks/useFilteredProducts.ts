@@ -1,6 +1,7 @@
 import { FilterContext } from './../context/FilterContext';
 import { useContext } from 'react';
 import { IProduct } from './../models/interfaces/index';
+import { SiOrigin } from 'react-icons/si';
 export default function useFilteredProducts(
 	allProducts: IProduct[] | undefined
 ): IProduct[] | undefined {
@@ -24,9 +25,7 @@ export default function useFilteredProducts(
 	}
 	if (placeOriginId) {
 		filteredProducts = filteredProducts.filter(product =>
-			product.place_origins.filter(
-				placeOrigin => placeOrigin.id === placeOriginId
-			)
+			product.place_origins.find(origin => placeOriginId === origin.id)
 		);
 	}
 	if (roastLevelId) {

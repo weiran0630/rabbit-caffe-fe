@@ -10,7 +10,7 @@ export default function getKey(
 
 	if (previousPageData) {
 		return `/products?_start=${
-			previousPageData[previousPageData.length - 1].id
+			previousPageData[previousPageData.length - 1].id - 1
 		}&_limit=5&_sort=id`;
 	}
 

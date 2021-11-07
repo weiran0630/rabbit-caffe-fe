@@ -29,7 +29,7 @@ export default function ProductList({ initialData }: ProductListProps) {
 
 	return (
 		<Container>
-			{filteredProducts?.length && (
+			{filteredProducts && (
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
@@ -52,22 +52,25 @@ export default function ProductList({ initialData }: ProductListProps) {
 
 const Container = styled.div`
 	width: 100%;
+	min-height: 100vh;
+	padding: 2rem;
 	display: flex;
 	justify-content: center;
-	padding: 2rem;
 
 	.inf-scroll {
-		width: 100vw;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
-		padding: 2rem;
 
 		.loader {
 			margin: 2rem;
 			color: #a5a5a58f;
 			width: 100%;
 			display: flex;
+			justify-content: center;
+		}
+
+		@media (max-width: 566px) {
 			justify-content: center;
 		}
 	}

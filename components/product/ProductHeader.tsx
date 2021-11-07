@@ -46,15 +46,26 @@ const Container = styled.div`
 		padding: 0.5rem;
 		margin-bottom: 0.5rem;
 		padding: 4px 10px 5px 12px;
-		border-radius: 8px;
+		border-radius: 6px;
 		user-select: none;
 		cursor: pointer;
-		transition: all 0.15s ease-in;
+		transition: all 0.07s ease-in;
 
 		&.active,
 		&:hover {
 			color: white;
+		}
+
+		&.active {
 			background-color: #533a32;
+		}
+		&:hover {
+			background-color: #533a3268;
+		}
+
+		@media (max-width: 444px) {
+			font-size: 0.5rem;
+			padding: 4px 6px 5px 6px;
 		}
 	}
 `;

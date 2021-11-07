@@ -129,12 +129,12 @@ const Nav = styled.nav`
 		gap: 0.5rem;
 		align-items: center;
 		padding: 3px 10px 5px 10px;
-		border-radius: 8px;
-		transition: all 0.15s ease-in;
+		border-radius: 6px;
+		transition: all 0.07s ease-in;
 
 		&:hover {
 			color: white;
-			background-color: #533a32;
+			background-color: #533a3268;
 		}
 
 		@media (max-width: 559px) {
