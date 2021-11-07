@@ -55,6 +55,7 @@ export default function Products({
 const Container = styled.div`
 	width: 100vw;
 	display: flex;
+	padding: 2rem;
 
 	@media (max-width: 566px) {
 		flex-direction: column;
