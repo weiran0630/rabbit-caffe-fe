@@ -25,6 +25,8 @@ export default function ProductList({ initialData }: ProductListProps) {
 	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 5);
 	const filteredProducts = useFilteredProducts(products);
 
+	console.log(products.length);
+
 	return (
 		<Container>
 			{filteredProducts?.length && (
@@ -50,13 +52,13 @@ export default function ProductList({ initialData }: ProductListProps) {
 
 const Container = styled.div`
 	width: 100%;
-	min-height: 100vh;
 	display: flex;
+	justify-content: center;
+	padding: 2rem;
 
 	.inf-scroll {
 		width: 100vw;
 		display: flex;
-		justify-content: center;
 		flex-wrap: wrap;
 		gap: 1rem;
 		padding: 2rem;

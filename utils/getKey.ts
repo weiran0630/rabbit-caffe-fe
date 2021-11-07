@@ -6,7 +6,7 @@ export default function getKey(
 ) {
 	if (previousPageData && !previousPageData.length) return null;
 
-	if (pageIndex === 0) return '/products?_start=6&_limit=5&_sort=id';
+	if (pageIndex === 0) return '/products?_start=5&_limit=5&_sort=id';
 
 	if (previousPageData) {
 		return `/products?_start=${

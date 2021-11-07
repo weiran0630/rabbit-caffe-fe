@@ -20,6 +20,11 @@ export default function ProductHeader() {
 
 	return (
 		<Container>
+			<span
+				className={`clickable ${categoryId === null ? 'active' : ''}`}
+				onClick={() => setFilter({ ...filter, categoryId: null })}>
+				所有系列
+			</span>
 			{categories?.map(category => (
 				<span
 					className={`clickable ${categoryId === category.id ? 'active' : ''}`}
@@ -36,6 +41,7 @@ const Container = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	gap: 0.5rem;
 
 	.clickable {
@@ -46,8 +52,10 @@ const Container = styled.div`
 		border-radius: 8px;
 		user-select: none;
 		cursor: pointer;
+		transition: all 0.15s ease-in;
 
-		&.active {
+		&.active,
+		&:hover {
 			color: white;
 			background-color: #533a32;
 		}

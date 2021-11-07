@@ -2,7 +2,6 @@ import React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
-import styled from '@emotion/styled';
 
 import fetcher from 'utils/fetcher';
 import ProductList from '@/components/product/ProductList';
@@ -35,15 +34,9 @@ export default function Products({
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Container>
-				<SWRConfig value={{ fallback }}>
-					<ProductList initialData={products} />
-				</SWRConfig>
-			</Container>
+			<SWRConfig value={{ fallback }}>
+				<ProductList initialData={products} />
+			</SWRConfig>
 		</>
 	);
 }
-
-const Container = styled.div`
-	min-height: 100vh;
-`;
