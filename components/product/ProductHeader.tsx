@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
-import {
-	FilterContext,
-	filterContextDefaultValue,
-} from 'context/FilterContext';
+import { FilterContext } from 'context/FilterContext';
 import useSWRImmutable from 'swr/immutable';
 import fetcher from 'utils/fetcher';
 import { ICategory } from 'models/interfaces';

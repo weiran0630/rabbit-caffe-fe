@@ -9,13 +9,13 @@ import { IProduct, IRoastLevel } from 'models/interfaces';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const products = await fetcher<IProduct[]>('/products?_limit=5&_sort=id');
-	const categories = await fetcher<IRoastLevel[]>('/categories');
+	const categories = await fetcher<IRoastLevel[]>('/categories?_sort=id');
 
 	return {
 		props: {
 			fallback: {
 				'/products?_limit=5&_sort=id': products,
-				'/categories': categories,
+				'/categories?_sort=id': categories,
 			},
 			products,
 		},
