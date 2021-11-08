@@ -15,7 +15,6 @@ import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	let products = await fetcher<IProduct[]>('/products');
-
 	products = products.filter((_, index) => index <= 10);
 
 	const paths = products.map(product => {

@@ -11,13 +11,13 @@ import styled from '@emotion/styled';
 import CategoryImageContainer from '@/components/product/CategoryImageContainer';
 
 export const getStaticProps: GetStaticProps = async () => {
-	const products = await fetcher<IProduct[]>('/products?_limit=10&_sort=id');
+	const products = await fetcher<IProduct[]>('/products?_limit=6&_sort=id');
 	const roastLevels = await fetcher<IRoastLevel[]>('/roast-levels?_sort=id');
 
 	return {
 		props: {
 			fallback: {
-				'/products?_limit=10&_sort=id': products,
+				'/products?_limit=6&_sort=id': products,
 				'/roast-levels?_sort=id': roastLevels,
 			},
 			products,
@@ -54,7 +54,7 @@ const Container = styled.div`
 	.content {
 		width: 100vw;
 		display: flex;
-		padding: 2rem;
+		padding: 2rem 4rem;
 
 		@media (max-width: 566px) {
 			flex-direction: column;

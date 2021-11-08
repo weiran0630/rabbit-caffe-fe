@@ -11,6 +11,7 @@ import { ICategory } from 'models/interfaces';
 export default function CategoryImageContainer() {
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 	const {
 		filter: { categoryId },
 	} = useContext(FilterContext);
@@ -39,6 +40,7 @@ export default function CategoryImageContainer() {
 				width='100'
 				height='25'
 				layout='responsive'
+				priority
 			/>
 			<h2 className='title'>{categoryHeader}</h2>
 		</Container>
@@ -51,7 +53,7 @@ const Container = styled.div`
 
 	.title {
 		font-size: 3rem;
-		color: white;
+		color: #fefefed0;
 		position: absolute;
 		left: 50%;
 		top: 50%;

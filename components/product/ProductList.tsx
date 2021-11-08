@@ -31,7 +31,6 @@ export default function ProductList({ initialData }: ProductListProps) {
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
-					scrollThreshold={0.3}
 					next={() => setSize(size + 1)}
 					hasMore={!isReachingEnd}
 					loader={
@@ -39,7 +38,12 @@ export default function ProductList({ initialData }: ProductListProps) {
 							<Loader />
 						</div>
 					}
-					endMessage={<p className='loader'>已列出所有商品</p>}>
+					endMessage={
+						<p className='loader'>
+							已列出所有商品 <br />
+							商品數：{filteredProducts?.length}
+						</p>
+					}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}
@@ -54,16 +58,18 @@ const Container = styled.div`
 	min-height: 100vh;
 	padding: 2rem;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 
 	.inf-scroll {
 		display: flex;
+		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 1rem;
 
 		.loader {
 			margin: 2rem;
-			color: #a5a5a58f;
+			color: #a5a5a5;
 			width: 100%;
 			display: flex;
 			justify-content: center;

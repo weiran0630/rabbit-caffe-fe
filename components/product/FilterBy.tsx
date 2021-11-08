@@ -151,7 +151,7 @@ const Container = styled.div`
 	min-width: 25vw;
 
 	h3 {
-		color: #575757;
+		color: #a5a5a5;
 		margin-bottom: 0.3em;
 	}
 
@@ -204,6 +204,6 @@ const Container = styled.div`
 
 	@media (max-width: 566px) {
 		max-width: 100%;
-		margin: 0;
+		margin: 1rem;
 	}
 `;
