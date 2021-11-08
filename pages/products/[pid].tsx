@@ -48,6 +48,8 @@ export const getStaticProps: GetStaticProps<GetStaticPropsType, IParams> =
 export default function ProductDetailsPage({
 	product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const devEnv = process.env.NODE_ENV === 'development';
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
 
 	return (
@@ -69,9 +71,7 @@ export default function ProductDetailsPage({
 						<Image
 							className='product-detail'
 							src={
-								process.env.NODE_ENV === 'development'
-									? process.env.NEXT_PUBLIC_API_URL + product.image[0].url
-									: product.image[0].url
+								devEnv ? API_URL + product.image[0].url : product.image[0].url
 							}
 							alt='product image'
 							width='30'

@@ -4,7 +4,7 @@ export interface ICategory {
 	product: number;
 	created_at: Date;
 	updated_at: Date;
-	cate_image?: any;
+	cate_image?: IImage;
 }
 
 export interface ICompany {

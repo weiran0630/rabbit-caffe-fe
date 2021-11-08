@@ -12,6 +12,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+	const devEnv = process.env.NODE_ENV === 'development';
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
 
 	return (
@@ -20,11 +22,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 				<div className='img-container'>
 					<Image
 						className='product-image'
-						src={
-							process.env.NODE_ENV === 'development'
-								? process.env.NEXT_PUBLIC_API_URL + product.image[0].url
-								: product.image[0].url
-						}
+						src={devEnv ? API_URL + product.image[0].url : product.image[0].url}
 						layout='fill'
 						alt='product image'
 					/>

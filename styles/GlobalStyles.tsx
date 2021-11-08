@@ -21,7 +21,8 @@ export default function GlobalStyles() {
 				}
 
 				.hero-image,
-				.product-image {
+				.product-image,
+				.category-image {
 					object-fit: cover;
 				}
 				.product-image {
@@ -31,6 +32,9 @@ export default function GlobalStyles() {
 				.product-detail {
 					display: flex;
 					object-fit: contain;
+				}
+				.category-image {
+					filter: brightness(0.6);
 				}
 			`}
 		/>

@@ -29,7 +29,7 @@ export default function RoastLevelRepresent({
 			circleArr.push(
 				<Circle
 					detail={detail}
-					color={roastColor[devEnv ? i - 2 : i - 3]}
+					color={roastColor[i - (devEnv ? 2 : 3)]}
 					key={i}
 				/>
 			);

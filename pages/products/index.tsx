@@ -8,6 +8,7 @@ import ProductList from '@/components/product/ProductList';
 import { IProduct, IRoastLevel } from 'models/interfaces';
 import FilterBy from '@/components/product/FilterBy';
 import styled from '@emotion/styled';
+import CategoryImageContainer from '@/components/product/CategoryImageContainer';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const products = await fetcher<IProduct[]>('/products?_limit=10&_sort=id');
@@ -38,8 +39,11 @@ export default function Products({
 
 			<Container>
 				<SWRConfig value={{ fallback }}>
-					<FilterBy />
-					<ProductList initialData={products} />
+					<CategoryImageContainer />
+					<div className='content'>
+						<FilterBy />
+						<ProductList initialData={products} />
+					</div>
 				</SWRConfig>
 			</Container>
 		</>
@@ -47,11 +51,13 @@ export default function Products({
 }
 
 const Container = styled.div`
-	width: 100vw;
-	display: flex;
-	padding: 2rem;
+	.content {
+		width: 100vw;
+		display: flex;
+		padding: 2rem;
 
-	@media (max-width: 566px) {
-		flex-direction: column;
+		@media (max-width: 566px) {
+			flex-direction: column;
+		}
 	}
 `;
