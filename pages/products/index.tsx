@@ -11,11 +11,13 @@ import styled from '@emotion/styled';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const products = await fetcher<IProduct[]>('/products?_limit=10&_sort=id');
+	const roastLevels = await fetcher<IRoastLevel[]>('/roast-levels?_sort=id');
 
 	return {
 		props: {
 			fallback: {
 				'/products?_limit=10&_sort=id': products,
+				'/roast-levels?_sort=id': roastLevels,
 			},
 			products,
 		},

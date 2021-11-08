@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import useSWRImmutable from 'swr/immutable';
 
 import { IRoastLevel } from 'models/interfaces';
+import fetcher from 'utils/fetcher';
 
 interface RoastLevelRepresentProps {
 	roastLevel: IRoastLevel;
@@ -12,11 +14,26 @@ export default function RoastLevelRepresent({
 	roastLevel,
 	detail,
 }: RoastLevelRepresentProps) {
+	const devEnv = process.env.NODE_ENV === 'development';
 	const roastColor = ['#f2c088', '#e59c4f', '#a76a32', '#5d341a', '#30170f'];
 
+	const { data: roastLevels } = useSWRImmutable<IRoastLevel[]>(
+		'/roast-levels?_sort=id',
+		fetcher
+	);
+
 	let circleArr = [];
-	for (let i = 0; i <= roastLevel.level.length; i++) {
-		circleArr.push(<Circle detail={detail} color={roastColor[i]} key={i} />);
+
+	if (roastLevels) {
+		for (let i = roastLevels[0].id; i <= roastLevel.id; i++) {
+			circleArr.push(
+				<Circle
+					detail={detail}
+					color={roastColor[devEnv ? i - 2 : i - 3]}
+					key={i}
+				/>
+			);
+		}
 	}
 
 	return (

@@ -14,7 +14,9 @@ import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const products = await fetcher<IProduct[]>('/products');
+	let products = await fetcher<IProduct[]>('/products');
+
+	products = products.filter((_, index) => index <= 10);
 
 	const paths = products.map(product => {
 		return {
@@ -40,7 +42,7 @@ export const getStaticProps: GetStaticProps<GetStaticPropsType, IParams> =
 		const params = ctx.params!;
 		const product = await fetcher<IProduct>(`/products/${params.pid}`);
 
-		return { props: { product } };
+		return { props: { product }, revalidate: 20 };
 	};
 
 export default function ProductDetailsPage({
