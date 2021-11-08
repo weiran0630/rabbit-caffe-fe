@@ -91,6 +91,8 @@ export default function ProductDetailsPage({
 
 						<ButtonStyled>加入購物車</ButtonStyled>
 
+						<h4 className='description'>內容量：</h4>
+						<p className='actual-desc'>{product.unit}</p>
 						<h4 className='description'>商品描述：</h4>
 						<Markdown className='actual-desc'>{product.description}</Markdown>
 					</Info>
