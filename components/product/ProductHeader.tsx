@@ -49,7 +49,7 @@ const Container = styled.div`
 		border-radius: 6px;
 		user-select: none;
 		cursor: pointer;
-		transition: all 0.07s ease-in;
+		transition: all 0.07s ease-in-out;
 
 		&.active,
 		&:hover {

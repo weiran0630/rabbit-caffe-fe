@@ -49,8 +49,8 @@ const Card = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	border-radius: 4px;
-	background-color: #fefefedf;
-	backdrop-filter: grayscale(0.5) opacity(0.1);
+	background-color: #fefefe;
+	border: 1px solid #e9e9e9;
 	box-shadow: 0px 1px 3px 1px #00000018;
 
 	.top {

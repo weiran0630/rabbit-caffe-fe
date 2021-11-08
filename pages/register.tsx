@@ -33,9 +33,9 @@ const Container = styled.div`
 	.content {
 		width: 30rem;
 		padding: 2rem;
-		border: 1px solid #e9e9e9ab;
+		border: 1px solid #e9e9e9;
 		border-radius: 4px;
-		background-color: #fefefedf;
+		background-color: #fefefe;
 		box-shadow: 0px 1px 3px 0px #0000000e;
 
 		@media (max-width: 520px) {

@@ -10,20 +10,12 @@ import FilterBy from '@/components/product/FilterBy';
 import styled from '@emotion/styled';
 
 export const getStaticProps: GetStaticProps = async () => {
-	const products = await fetcher<IProduct[]>('/products?_limit=5&_sort=id');
-	const categories = await fetcher<IRoastLevel[]>('/categories?_sort=id');
-	const placeOrigins = await fetcher('/place-origins?_sort=id');
-	const roastLevels = await fetcher('/roast-levels?_sort=id');
-	const companies = await fetcher('/companies?_sort=id');
+	const products = await fetcher<IProduct[]>('/products?_limit=10&_sort=id');
 
 	return {
 		props: {
 			fallback: {
-				'/products?_limit=5&_sort=id': products,
-				'/categories?_sort=id': categories,
-				'/place-origins?_sort=id': placeOrigins,
-				'/roast-levels?_sort=id': roastLevels,
-				'/companies?_sort=id': companies,
+				'/products?_limit=10&_sort=id': products,
 			},
 			products,
 		},

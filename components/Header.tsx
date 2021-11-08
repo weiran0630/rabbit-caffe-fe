@@ -130,7 +130,7 @@ const Nav = styled.nav`
 		align-items: center;
 		padding: 3px 10px 5px 10px;
 		border-radius: 6px;
-		transition: all 0.07s ease-in;
+		transition: all 0.07s ease-in-out;
 
 		&:hover {
 			color: white;

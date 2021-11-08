@@ -1,12 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import fetcher from 'utils/fetcher';
+import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
+import { IoArrowBackSharp } from 'react-icons/io5';
 
+import fetcher from 'utils/fetcher';
 import { IProduct } from 'models/interfaces';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
@@ -15,7 +17,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	const products = await fetcher<IProduct[]>('/products');
 
 	const paths = products.map(product => {
-		console.log(product.id);
 		return {
 			params: {
 				pid: product.id.toString(),
@@ -45,6 +46,8 @@ export const getStaticProps: GetStaticProps<GetStaticPropsType, IParams> =
 export default function ProductDetailsPage({
 	product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
@@ -53,6 +56,12 @@ export default function ProductDetailsPage({
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<MainStyled>
+				<IoArrowBackSharp
+					className='back-button'
+					size={30}
+					onClick={() => router.back()}
+				/>
+
 				<ImageContainer>
 					<div>
 						<Image
@@ -77,7 +86,9 @@ export default function ProductDetailsPage({
 						<h3 className='company'>{product.company.com_name}</h3>
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
 						<h2 className='price'>$ {product.price}</h2>
+
 						<ButtonStyled>加入購物車</ButtonStyled>
+
 						<h4 className='description'>商品描述：</h4>
 						<Markdown className='actual-desc'>{product.description}</Markdown>
 					</Info>
@@ -88,15 +99,31 @@ export default function ProductDetailsPage({
 }
 
 const MainStyled = styled.main`
+	position: relative;
 	width: 100vw;
 	display: flex;
 	flex-wrap: wrap;
-	padding: 3rem 3rem;
+	padding: 3rem;
+
+	.back-button {
+		cursor: pointer;
+		user-select: none;
+		position: absolute;
+		z-index: 2;
+		top: 2rem;
+		left: 2rem;
+		margin: 3rem;
+
+		@media (max-width: 879px) {
+			margin: 0;
+		}
+	}
 
 	@media (max-width: 1457px) {
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+		padding: 2rem;
 	}
 `;
 
@@ -109,7 +136,6 @@ const Section = styled.section`
 	@media (max-width: 1457px) {
 		width: 100%;
 	}
-
 	@media (max-width: 700px) {
 		padding: 0;
 	}
@@ -157,6 +183,7 @@ const Info = styled.div`
 	.description {
 		margin-top: 2rem;
 	}
+
 	.actual-desc {
 		color: #858585;
 		font-size: 0.9rem;

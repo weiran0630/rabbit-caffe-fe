@@ -25,14 +25,13 @@ export default function ProductList({ initialData }: ProductListProps) {
 	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < 5);
 	const filteredProducts = useFilteredProducts(products);
 
-	console.log(products.length);
-
 	return (
 		<Container>
 			{filteredProducts && (
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
+					scrollThreshold={0.3}
 					next={() => setSize(size + 1)}
 					hasMore={!isReachingEnd}
 					loader={
