@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -10,14 +10,25 @@ import {
 	IoCafeSharp,
 	IoCartSharp,
 } from 'react-icons/io5';
+
 import ProductHeader from '@/components/product/ProductHeader';
 import Modal from './common/Modal';
 import Cart from './cart/Cart';
+import { AppContext } from 'context/AppContext';
+import { CartItemType } from 'models/interfaces';
 
 export default function Header() {
 	const router = useRouter();
 	const [session, _] = useSession();
 	const [isCartOpen, setIsCartOpen] = useState(false);
+	const { cartItems } = useContext(AppContext);
+
+	const getTotalAmount = (allItems: CartItemType[]) => {
+		return allItems.reduce(
+			(accumulator, item) => (accumulator += item.amount),
+			0
+		);
+	};
 
 	return (
 		<>
@@ -72,7 +83,14 @@ export default function Header() {
 					<span
 						className='clickable'
 						onClick={() => setIsCartOpen(!isCartOpen)}>
-						<IoCartSharp size={20} />
+						<span
+							className={`has-badge ${
+								getTotalAmount(cartItems) > 0 && 'active'
+							}`}
+							data-count={getTotalAmount(cartItems)}>
+							<IoCartSharp size={20} />
+						</span>
+
 						<span>購物車</span>
 					</span>
 				</Nav>
@@ -154,6 +172,29 @@ const Nav = styled.nav`
 			padding: 10px;
 			span {
 				display: none;
+			}
+		}
+		.has-badge {
+			position: relative;
+			display: flex;
+			align-items: center;
+
+			&.active[data-count]:after {
+				content: attr(data-count);
+				position: absolute;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				top: -50%;
+				right: -50%;
+				font-size: 0.5rem;
+				height: 1rem;
+				width: 1rem;
+				padding: 2px 2px 3px 2px;
+				border-radius: 50%;
+				color: #fff;
+				background: #f10000f0;
+				font-weight: bold;
 			}
 		}
 	}

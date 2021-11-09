@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { AppContext } from 'context/AppContext';
 import { CartItemType } from 'models/interfaces';
 import React, { useContext } from 'react';
+import ButtonLink from '../common/ButtonLink';
 
 export default function Cart() {
 	const { cartItems: previousCart, setCartItems } = useContext(AppContext);
@@ -36,26 +37,40 @@ export default function Cart() {
 	};
 
 	return (
-		<Container>
-			<h2>購物車</h2>
-			{previousCart.length ? (
-				previousCart.map(item => (
-					<p key={item.id}>
-						{item.title}{' '}
-						<button onClick={() => setCartItems(handleAddAmount(item.id))}>
-							+1
-						</button>
-						{item.amount}
-						<button onClick={() => setCartItems(handleReduceAmount(item.id))}>
-							-1
-						</button>
-					</p>
-				))
-			) : (
-				<p>您的購物車爲空</p>
-			)}
-		</Container>
+		<>
+			<Container>
+				{previousCart.length ? (
+					previousCart.map(item => (
+						<p key={item.id}>
+							{item.title}{' '}
+							<button onClick={() => setCartItems(handleAddAmount(item.id))}>
+								+1
+							</button>
+							{item.amount}
+							<button onClick={() => setCartItems(handleReduceAmount(item.id))}>
+								-1
+							</button>
+						</p>
+					))
+				) : (
+					<div className='empty'>
+						<p>您的購物車爲空</p>
+						<p>回到商品頁立即購物～</p>
+					</div>
+				)}
+			</Container>
+		</>
 	);
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+	padding: 2rem;
+
+	.empty {
+		color: #858585;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+`;

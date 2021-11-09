@@ -42,7 +42,6 @@ export default function Modal({
 							<GrClose />
 						</CloseButton>
 					)}
-
 					{children}
 				</ModalContent>
 			</Dimmer>

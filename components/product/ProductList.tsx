@@ -27,7 +27,7 @@ export default function ProductList({ initialData }: ProductListProps) {
 
 	return (
 		<Container>
-			{filteredProducts && (
+			{filteredProducts ? (
 				<InfiniteScroll
 					className='inf-scroll'
 					dataLength={filteredProducts.length}
@@ -38,17 +38,16 @@ export default function ProductList({ initialData }: ProductListProps) {
 							<Loader />
 						</div>
 					}
-					endMessage={
-						<p className='loader'>
-							已列出所有商品 <br />
-							商品數：{filteredProducts?.length}
-						</p>
-					}
+					endMessage={<p className='loader'>已列出所有商品</p>}
 					scrollThreshold={0.2}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}
 				</InfiniteScroll>
+			) : (
+				<div className='loader'>
+					<Loader />
+				</div>
 			)}
 		</Container>
 	);
