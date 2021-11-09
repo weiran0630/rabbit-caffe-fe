@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ import fetcher from 'utils/fetcher';
 import { IProduct } from 'models/interfaces';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
+import { AppContext } from 'context/AppContext';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	let products = await fetcher<IProduct[]>('/products');
@@ -51,6 +52,22 @@ export default function ProductDetailsPage({
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
 
+	const { cartItems: previousCart, setCartItems } = useContext(AppContext);
+
+	const handleAddToCart = (clickedItem: IProduct) => {
+		const isItemInCart = previousCart.find(item => item.id === clickedItem.id);
+
+		if (isItemInCart) {
+			return previousCart.map(item =>
+				// if item is already in cart => amount += 1
+				item.id === clickedItem.id ? { ...item, amount: item.amount + 1 } : item
+			);
+		} else {
+			// if doesn't => amount = 1
+			return [...previousCart, { ...clickedItem, amount: 1 }];
+		}
+	};
+
 	return (
 		<>
 			<Head>
@@ -58,7 +75,7 @@ export default function ProductDetailsPage({
 				{/* <meta name='description' content='' /> */}
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<MainStyled>
+			<Container>
 				<IoArrowBackSharp
 					className='back-button'
 					size={30}
@@ -88,7 +105,10 @@ export default function ProductDetailsPage({
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
 						<h2 className='price'>$ {product.price}</h2>
 
-						<ButtonStyled>加入購物車</ButtonStyled>
+						<ButtonStyled
+							onClick={() => setCartItems(handleAddToCart(product))}>
+							加入購物車
+						</ButtonStyled>
 
 						<h4 className='description'>內容量：</h4>
 						<p className='actual-desc'>{product.unit}</p>
@@ -96,12 +116,12 @@ export default function ProductDetailsPage({
 						<Markdown className='actual-desc'>{product.description}</Markdown>
 					</Info>
 				</Section>
-			</MainStyled>
+			</Container>
 		</>
 	);
 }
 
-const MainStyled = styled.main`
+const Container = styled.main`
 	position: relative;
 	width: 100vw;
 	display: flex;

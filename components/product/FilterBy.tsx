@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 import fetcher from 'utils/fetcher';
-import { FilterContext } from 'context/FilterContext';
+import { AppContext } from 'context/AppContext';
 import { ICompany, IPlaceOrigin, IRoastLevel } from 'models/interfaces';
 import { Separator } from '@/components/common/Separator';
 
@@ -25,7 +25,7 @@ export default function FilterBy() {
 	const {
 		filter: { companyId, placeOriginId, roastLevelId, ...filter },
 		setFilter,
-	} = useContext(FilterContext);
+	} = useContext(AppContext);
 
 	const [originOpen, setOriginOpen] = useState(false);
 	const [roastLvOpen, setRoastLvOpen] = useState(false);

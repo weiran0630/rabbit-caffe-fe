@@ -2,12 +2,12 @@ import React from 'react';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
+import styled from '@emotion/styled';
 
 import fetcher from 'utils/fetcher';
+import FilterBy from '@/components/product/FilterBy';
 import ProductList from '@/components/product/ProductList';
 import { IProduct, IRoastLevel } from 'models/interfaces';
-import FilterBy from '@/components/product/FilterBy';
-import styled from '@emotion/styled';
 import CategoryImageContainer from '@/components/product/CategoryImageContainer';
 
 export const getStaticProps: GetStaticProps = async () => {

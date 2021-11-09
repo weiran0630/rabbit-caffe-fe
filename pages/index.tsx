@@ -1,21 +1,12 @@
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import imgSrc from 'public/images/hero-image.jpg';
 
 import ButtonLink from '@/components/common/ButtonLink';
-import { useEffect } from 'react';
 
 const Home: NextPage = () => {
-	const router = useRouter();
-
-	useEffect(() => {
-		router.prefetch('/login');
-		router.prefetch('/register');
-	}, [router]);
-
 	return (
 		<>
 			<Head>
@@ -24,7 +15,7 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<MainStyled>
+			<Container>
 				<Section>
 					<div>
 						<h2>
@@ -54,12 +45,12 @@ const Home: NextPage = () => {
 						priority
 					/>
 				</ImageContainer>
-			</MainStyled>
+			</Container>
 		</>
 	);
 };
 
-const MainStyled = styled.div`
+const Container = styled.div`
 	width: 100vw;
 	display: flex;
 	align-items: center;

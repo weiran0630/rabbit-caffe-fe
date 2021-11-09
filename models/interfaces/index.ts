@@ -139,3 +139,6 @@ export interface IFilter {
 	placeOriginId: number | null;
 	roastLevelId: number | null;
 }
+
+// concat IProduct with amount
+export type CartItemType = IProduct & { amount: number };

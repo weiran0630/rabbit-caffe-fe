@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
 
 import fetcher from 'utils/fetcher';
-import { FilterContext } from 'context/FilterContext';
+import { AppContext } from 'context/AppContext';
 import allProductImg from 'public/images/all-products.jpg';
 import { ICategory } from 'models/interfaces';
 
@@ -14,7 +14,7 @@ export default function CategoryImageContainer() {
 
 	const {
 		filter: { categoryId },
-	} = useContext(FilterContext);
+	} = useContext(AppContext);
 
 	const { data: categories } = useSWRImmutable<ICategory[]>(
 		'/categories',

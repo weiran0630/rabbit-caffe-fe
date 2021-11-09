@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
-import { FilterContext } from 'context/FilterContext';
+import { AppContext } from 'context/AppContext';
 import useSWRImmutable from 'swr/immutable';
 import fetcher from 'utils/fetcher';
 import { ICategory } from 'models/interfaces';
@@ -9,7 +9,7 @@ export default function ProductHeader() {
 	const {
 		filter: { categoryId, ...filter },
 		setFilter,
-	} = useContext(FilterContext);
+	} = useContext(AppContext);
 	const { data: categories } = useSWRImmutable<ICategory[]>(
 		'/categories',
 		fetcher

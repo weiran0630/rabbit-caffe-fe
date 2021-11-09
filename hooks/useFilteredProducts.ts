@@ -1,4 +1,4 @@
-import { FilterContext } from './../context/FilterContext';
+import { AppContext } from '../context/AppContext';
 import { useContext } from 'react';
 import { IProduct } from './../models/interfaces/index';
 import { SiOrigin } from 'react-icons/si';
@@ -7,7 +7,7 @@ export default function useFilteredProducts(
 ): IProduct[] | undefined {
 	const {
 		filter: { categoryId, companyId, placeOriginId, roastLevelId, searchTerm },
-	} = useContext(FilterContext);
+	} = useContext(AppContext);
 
 	if (!allProducts) return undefined;
 

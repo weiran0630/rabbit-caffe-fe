@@ -1,14 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import useSWRInfinite from 'swr/infinite';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import fetcher from 'utils/fetcher';
 import getKey from 'utils/getKey';
-import useFilteredProducts from 'hooks/useFilteredProducts';
 import { IProduct } from 'models/interfaces';
 import ProductCard from './ProductCard';
 import Loader from '../common/Loader';
+import useFilteredProducts from 'hooks/useFilteredProducts';
 
 interface ProductListProps {
 	initialData: IProduct[];
@@ -43,7 +43,8 @@ export default function ProductList({ initialData }: ProductListProps) {
 							已列出所有商品 <br />
 							商品數：{filteredProducts?.length}
 						</p>
-					}>
+					}
+					scrollThreshold={0.2}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}

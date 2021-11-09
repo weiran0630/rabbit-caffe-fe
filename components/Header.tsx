@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -10,63 +10,76 @@ import {
 	IoCafeSharp,
 	IoCartSharp,
 } from 'react-icons/io5';
-import ProductHeader from './product/ProductHeader';
+import ProductHeader from '@/components/product/ProductHeader';
+import Modal from './common/Modal';
+import Cart from './cart/Cart';
 
 export default function Header() {
 	const router = useRouter();
 	const [session, _] = useSession();
+	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	return (
-		<Container>
-			<HeaderStyled>
-				<h1>
-					Ra
-					<span>
-						<SiRabbitmq />
-					</span>
-					it Caffe
-				</h1>
-			</HeaderStyled>
+		<>
+			{isCartOpen && (
+				<Modal setIsDisplay={setIsCartOpen}>
+					<Cart />
+				</Modal>
+			)}
 
-			<Nav>
-				<Link href='/' passHref>
-					<span className='clickable'>
-						<IoHomeSharp className='logo' size={20} />
-						<span>主頁</span>
-					</span>
-				</Link>
+			<Container>
+				<HeaderStyled>
+					<h1>
+						Ra
+						<span>
+							<SiRabbitmq />
+						</span>
+						it Caffe
+					</h1>
+				</HeaderStyled>
 
-				<Link href='/products' passHref>
-					<span className='clickable'>
-						<IoCafeSharp size={20} />
-						<span>所有商品</span>
-					</span>
-				</Link>
-
-				{session ? (
-					<Link href='/member' passHref>
+				<Nav>
+					<Link href='/' passHref shallow>
 						<span className='clickable'>
-							<IoPersonCircleSharp size={20} />
-							<span>會員專區</span>
+							<IoHomeSharp className='logo' size={20} />
+							<span>主頁</span>
 						</span>
 					</Link>
-				) : (
-					<Link href='/login' passHref>
+
+					<Link href='/products' passHref shallow>
 						<span className='clickable'>
-							<IoPersonCircleSharp size={20} />
-							<span>加入會員/登錄</span>
+							<IoCafeSharp size={20} />
+							<span>所有商品</span>
 						</span>
 					</Link>
-				)}
 
-				<span className='clickable'>
-					<IoCartSharp size={20} />
-					<span>購物車</span>
-				</span>
-			</Nav>
+					{session ? (
+						<Link href='/member' passHref shallow>
+							<span className='clickable'>
+								<IoPersonCircleSharp size={20} />
+								<span>會員專區</span>
+							</span>
+						</Link>
+					) : (
+						<Link href='/login' passHref shallow>
+							<span className='clickable'>
+								<IoPersonCircleSharp size={20} />
+								<span>加入會員/登錄</span>
+							</span>
+						</Link>
+					)}
 
-			{router.pathname.match(/\/products$/) && <ProductHeader />}
-		</Container>
+					<span
+						className='clickable'
+						onClick={() => setIsCartOpen(!isCartOpen)}>
+						<IoCartSharp size={20} />
+						<span>購物車</span>
+					</span>
+				</Nav>
+
+				{router.pathname.match(/\/products$/) && <ProductHeader />}
+			</Container>
+		</>
 	);
 }
 
