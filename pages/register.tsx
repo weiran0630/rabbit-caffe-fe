@@ -1,10 +1,11 @@
 import React from 'react';
 import Head from 'next/head';
 import styled from '@emotion/styled';
+import { getSession } from 'next-auth/client';
 
 import RegisterForm from '@/components/form/register/RegisterForm';
 
-export default function Login() {
+export default function Register() {
 	return (
 		<>
 			<Head>
@@ -20,6 +21,20 @@ export default function Login() {
 			</Container>
 		</>
 	);
+}
+
+export async function getServerSideProps(context: any) {
+	const session = await getSession(context);
+
+	if (session) {
+		return {
+			redirect: {
+				destination: '/member',
+				permanent: false,
+			},
+		};
+	}
+	return { props: { session } };
 }
 
 const Container = styled.div`

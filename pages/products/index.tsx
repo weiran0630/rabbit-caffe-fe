@@ -7,18 +7,20 @@ import styled from '@emotion/styled';
 import fetcher from 'utils/fetcher';
 import FilterBy from '@/components/product/FilterBy';
 import ProductList from '@/components/product/ProductList';
-import { IProduct, IRoastLevel } from 'models/interfaces';
+import { ICategory, IProduct, IRoastLevel } from 'models/interfaces';
 import CategoryImageContainer from '@/components/product/CategoryImageContainer';
 
 export const getStaticProps: GetStaticProps = async () => {
 	const products = await fetcher<IProduct[]>('/products?_limit=6&_sort=id');
 	const roastLevels = await fetcher<IRoastLevel[]>('/roast-levels?_sort=id');
+	const categories = await fetcher<ICategory[]>('/categories');
 
 	return {
 		props: {
 			fallback: {
 				'/products?_limit=6&_sort=id': products,
 				'/roast-levels?_sort=id': roastLevels,
+				'/categories': categories,
 			},
 			products,
 		},

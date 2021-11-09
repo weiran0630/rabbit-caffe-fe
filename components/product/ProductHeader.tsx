@@ -10,6 +10,7 @@ export default function ProductHeader() {
 		filter: { categoryId, ...filter },
 		setFilter,
 	} = useContext(AppContext);
+
 	const { data: categories } = useSWRImmutable<ICategory[]>(
 		'/categories',
 		fetcher
