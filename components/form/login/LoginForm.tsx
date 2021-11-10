@@ -10,8 +10,9 @@ import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { Separator } from '@/components/common/Separator';
 import { ErrorMessage } from '@/components/form/Message';
 import { FormStyled } from '@/components/form/FormStyled';
-import ForgotPasswordForm from '@/components/form/login/ForgotPasswordForm';
+import { Others } from '@/components/form/Others';
 import Modal from '@/components/common/Modal';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 interface LoginFormValues {
 	email: string;
@@ -122,24 +123,6 @@ const CredentialLogin = styled.div`
 	margin: 1.5rem 0 2rem 0;
 	display: flex;
 	justify-content: space-between;
-`;
-
-const Others = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	justify-content: space-between;
-
-	.other {
-		cursor: pointer;
-		font-size: 0.8rem;
-		transition: all 0.1s ease-in-out;
-
-		&:hover {
-			font-weight: 700;
-			text-decoration: underline;
-		}
-	}
 `;
 
 const buttonConfig = {

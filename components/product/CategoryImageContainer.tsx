@@ -48,6 +48,7 @@ export default function CategoryImageContainer() {
 }
 
 const Container = styled.div`
+	user-select: none;
 	position: relative;
 	width: 100%;
 

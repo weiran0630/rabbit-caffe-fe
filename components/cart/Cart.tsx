@@ -9,7 +9,7 @@ import {
 	handleAddAmount,
 	handleReduceAmount,
 } from 'functions/cartManipulate';
-import { ButtonStyled } from '../common/ButtonStyled';
+import { ButtonStyled } from '@/components/common/ButtonStyled';
 
 export default function Cart() {
 	const devEnv = process.env.NODE_ENV === 'development';

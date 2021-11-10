@@ -7,6 +7,7 @@ import axios from 'axios';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { ErrorMessage } from '@/components/form/Message';
 import { FormStyled } from '@/components/form/FormStyled';
+import { Others } from '@/components/form/Others';
 import Modal from '@/components/common/Modal';
 import RegisterSuccess from './RegisterSuccess';
 
@@ -146,22 +147,4 @@ const Container = styled.div`
 const DateInput = styled.input`
 	margin-left: 0.1rem;
 	font-size: 0.9rem;
-`;
-
-const Others = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	justify-content: space-between;
-
-	.other {
-		cursor: pointer;
-		font-size: 0.8rem;
-		transition: all 0.1s ease-in-out;
-
-		&:hover {
-			font-weight: 700;
-			text-decoration: underline;
-		}
-	}
 `;

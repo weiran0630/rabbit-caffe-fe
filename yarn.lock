@@ -1050,6 +1050,11 @@ cliui@^7.0.2:
     strip-ansi "^6.0.0"
     wrap-ansi "^7.0.0"
 
+clsx@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
+  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -3657,6 +3662,13 @@ react-social-login-buttons@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/react-social-login-buttons/-/react-social-login-buttons-3.6.0.tgz#2be1cb114d8c0200581ba1c8ec5ea74e89cf7701"
   integrity sha512-m5E72jHWgC4VBxRziZYQC5kQIzooGRF+dDE97K5JgSlcDPXkNxCjCzP+Qp9fNhNujG7APvPx2Qhzi1BO2xi17Q==
+
+react-toastify@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-8.1.0.tgz#acaca4e8c4415c8474562dd84a14e6f390ed7f17"
+  integrity sha512-M+Q3rTmEw/53Csr7NsV/YnldJe4c7uERcY7Tma9mvLU98QT2VhIkKwjBzzxZkJRk/oBKyUAtkyMjMgO00hx6gQ==
+  dependencies:
+    clsx "^1.1.1"
 
 react@^17.0.2:
   version "17.0.2"

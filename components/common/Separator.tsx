@@ -5,6 +5,7 @@ interface SeparatorProps {
 }
 
 export const Separator = styled.div<SeparatorProps>`
+	user-select: none;
 	cursor: default;
 	color: #a5a5a58f;
 	font-size: 0.8rem;

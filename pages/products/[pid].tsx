@@ -7,12 +7,15 @@ import { ParsedUrlQuery } from 'querystring';
 import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import { IoArrowBackSharp } from 'react-icons/io5';
+import { FcCheckmark } from 'react-icons/fc';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import fetcher from 'functions/fetcher';
+import { AppContext } from 'context/AppContext';
 import { IProduct } from 'models/interfaces';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
-import { AppContext } from 'context/AppContext';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	let products = await fetcher<IProduct[]>('/products');
@@ -68,6 +71,13 @@ export default function ProductDetailsPage({
 		}
 	};
 
+	const notifyAddItem = () =>
+		toast('商品已加到購物車～', {
+			position: 'top-right',
+			hideProgressBar: true,
+			icon: <FcCheckmark size={30} />,
+		});
+
 	return (
 		<>
 			<Head>
@@ -100,13 +110,17 @@ export default function ProductDetailsPage({
 
 				<Section>
 					<Info>
+						<ToastContainer />
 						<h2 className='title'>{product.title}</h2>
 						<h3 className='company'>{product.company.com_name}</h3>
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
 						<h2 className='price'>$ {product.price}</h2>
 
 						<ButtonStyled
-							onClick={() => setCartItems(handleAddToCart(product))}>
+							onClick={() => {
+								setCartItems(handleAddToCart(product));
+								notifyAddItem();
+							}}>
 							加入購物車
 						</ButtonStyled>
 
