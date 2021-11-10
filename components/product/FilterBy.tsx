@@ -3,7 +3,7 @@ import useSWRImmutable from 'swr/immutable';
 import styled from '@emotion/styled';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import fetcher from 'utils/fetcher';
+import fetcher from 'functions/fetcher';
 import { AppContext } from 'context/AppContext';
 import { ICompany, IPlaceOrigin, IRoastLevel } from 'models/interfaces';
 import { Separator } from '@/components/common/Separator';
@@ -163,6 +163,11 @@ const Container = styled.div`
 		width: 100%;
 		cursor: pointer;
 		user-select: none;
+		transition: all 0.05s ease-in-out;
+
+		&:hover {
+			color: black;
+		}
 	}
 
 	.filter-category {

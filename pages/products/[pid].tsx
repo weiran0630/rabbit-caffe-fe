@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import { IoArrowBackSharp } from 'react-icons/io5';
 
-import fetcher from 'utils/fetcher';
+import fetcher from 'functions/fetcher';
 import { IProduct } from 'models/interfaces';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
@@ -129,6 +129,7 @@ const Container = styled.main`
 	padding: 3rem;
 
 	.back-button {
+		color: #858585;
 		cursor: pointer;
 		user-select: none;
 		position: absolute;
@@ -136,6 +137,11 @@ const Container = styled.main`
 		top: 2rem;
 		left: 2rem;
 		margin: 3rem;
+		transition: all 0.05s ease-in-out;
+
+		&:hover {
+			color: black;
+		}
 
 		@media (max-width: 879px) {
 			margin: 0;

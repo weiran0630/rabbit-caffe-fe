@@ -25,16 +25,23 @@ export default function GlobalStyles() {
 				.category-image {
 					object-fit: cover;
 				}
+
 				.product-image {
 					border-top-left-radius: 4px;
 					border-top-right-radius: 4px;
 				}
+
 				.product-detail {
 					display: flex;
 					object-fit: contain;
 				}
+
 				.category-image {
 					filter: brightness(0.6);
+				}
+
+				.item-image {
+					object-fit: contain;
 				}
 			`}
 		/>

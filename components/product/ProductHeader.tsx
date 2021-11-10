@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { AppContext } from 'context/AppContext';
 import useSWRImmutable from 'swr/immutable';
-import fetcher from 'utils/fetcher';
+import fetcher from 'functions/fetcher';
 import { ICategory } from 'models/interfaces';
 
 export default function ProductHeader() {

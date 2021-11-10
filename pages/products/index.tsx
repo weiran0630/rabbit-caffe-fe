@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import styled from '@emotion/styled';
 
-import fetcher from 'utils/fetcher';
+import fetcher from 'functions/fetcher';
 import FilterBy from '@/components/product/FilterBy';
 import ProductList from '@/components/product/ProductList';
 import { ICategory, IProduct, IRoastLevel } from 'models/interfaces';

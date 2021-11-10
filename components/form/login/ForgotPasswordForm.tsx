@@ -40,8 +40,8 @@ export default function ForgotPasswordForm() {
 	};
 
 	return (
-		<>
-			<FormStyled onSubmit={handleSubmit(onSubmit)}>
+		<FormStyled onSubmit={handleSubmit(onSubmit)} inputWidth={20}>
+			<Container>
 				<h2>忘記密碼</h2>
 
 				<input
@@ -65,19 +65,23 @@ export default function ForgotPasswordForm() {
 					</SuccessMessage>
 				)}
 
-				<Container>
+				<div className='button'>
 					<ButtonStyled
 						isDisable={isSuccess}
 						isLoading={isLoading}
 						onClick={handleSubmit(onSubmit)}>
 						{isLoading ? '發送中' : '重設密碼'}
 					</ButtonStyled>
-				</Container>
-			</FormStyled>
-		</>
+				</div>
+			</Container>
+		</FormStyled>
 	);
 }
 
 const Container = styled.div`
-	margin-top: 1rem;
+	margin: 2rem;
+
+	.button {
+		margin-top: 1rem;
+	}
 `;

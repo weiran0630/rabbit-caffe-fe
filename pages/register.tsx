@@ -54,7 +54,7 @@ const Container = styled.div`
 		box-shadow: 0px 1px 3px 0px #0000000e;
 
 		@media (max-width: 520px) {
-			width: 100%;
+			width: 90%;
 		}
 	}
 `;

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
 
-import fetcher from 'utils/fetcher';
+import fetcher from 'functions/fetcher';
 import { AppContext } from 'context/AppContext';
 import allProductImg from 'public/images/all-products.jpg';
 import { ICategory } from 'models/interfaces';

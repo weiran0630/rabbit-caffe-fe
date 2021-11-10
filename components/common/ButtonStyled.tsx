@@ -22,7 +22,7 @@ export const ButtonStyled = styled.span<ButtonStyledProps>`
 		isLoading || isDisable ? '#acacac' : '#533a32'};
 	filter: ${({ isLoading, isDisable }) =>
 		isLoading || isDisable ? 'opacity(0.3)' : 'opacity(1)'};
-	transition: all 0.15s ease-in-out;
+	transition: all 0.05s ease-in-out;
 
 	&:hover {
 		background-color: #6e5a4b;

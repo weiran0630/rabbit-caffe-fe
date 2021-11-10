@@ -34,6 +34,7 @@ export default function RegisterSuccess() {
 }
 
 const Container = styled.div`
+	padding: 2rem;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
