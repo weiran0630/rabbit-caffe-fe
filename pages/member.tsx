@@ -4,7 +4,14 @@ import { signOut } from 'next-auth/client';
 
 export default function Member() {
 	const [session, loading] = useSession();
-	return <div onClick={() => signOut()}>{session?.user?.email}</div>;
+
+	return (
+		<div>
+			<p>{session?.user?.email}</p>
+			<p>working in progress..</p>
+			<button onClick={() => signOut()}>Logout</button>
+		</div>
+	);
 }
 
 export async function getServerSideProps(context: any) {

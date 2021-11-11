@@ -9,7 +9,7 @@ import {
 	handleAddAmount,
 	handleReduceAmount,
 } from 'functions/cartManipulate';
-import { ButtonStyled } from '@/components/common/ButtonStyled';
+import Checkout from 'checkout';
 
 export default function Cart() {
 	const devEnv = process.env.NODE_ENV === 'development';
@@ -93,9 +93,10 @@ export default function Cart() {
 							<p className='cart-total'>
 								<span>總金額：</span>${getTotalPrice(cartItems)}
 							</p>
-							<ButtonStyled className='checkout-button'>去結帳</ButtonStyled>
 						</div>
 					</div>
+
+					<Checkout total={getTotalPrice(cartItems)} />
 				</>
 			) : (
 				<div className='empty'>

@@ -1,12 +1,19 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import imgSrc from 'public/images/hero-image.jpg';
 
 import ButtonLink from '@/components/common/ButtonLink';
+import Modal from '@/components/common/Modal';
+import { useState } from 'react';
+import CheckoutSuccess from 'checkout/CheckoutSuccess';
 
 const Home: NextPage = () => {
+	const [isModalOpen, setIsModalOpen] = useState(true);
+	const router = useRouter();
+
 	return (
 		<>
 			<Head>
@@ -14,6 +21,12 @@ const Home: NextPage = () => {
 				{/* <meta name='description' content='' /> */}
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
+
+			{router.query.redirect_status === 'succeeded' && isModalOpen && (
+				<Modal confetti setIsDisplay={setIsModalOpen}>
+					<CheckoutSuccess setIsDisplay={setIsModalOpen} />
+				</Modal>
+			)}
 
 			<Container>
 				<Section>

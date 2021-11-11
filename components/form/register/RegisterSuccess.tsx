@@ -40,7 +40,7 @@ const Container = styled.div`
 	flex-direction: column;
 	gap: 1rem;
 
-	span {
+	p span {
 		font-weight: 100;
 	}
 `;
