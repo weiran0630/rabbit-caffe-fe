@@ -57,7 +57,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 			elements,
 			confirmParams: {
 				return_url: `${
-					devEnv ? 'http://localhost:3000' : 'https://rabbit-caffee.vercel.app'
+					devEnv ? 'http://localhost:3000' : 'https://rabbit-caffe.vercel.app'
 				}`,
 				receipt_email: values.email,
 				shipping: { address: { line1: values.address }, name: values.name },
