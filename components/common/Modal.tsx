@@ -63,6 +63,7 @@ const Dimmer = styled.div`
 	z-index: 99;
 	width: 100%;
 	height: 100%;
+	overflow: scroll;
 	background-color: #000000c0;
 `;
 
@@ -94,7 +95,9 @@ const ModalContent = styled.div`
 	transform: translate(-50%, -50%);
 	background-color: #fefefe;
 	box-shadow: 0px 1px 3px 1px #00000018;
+	max-height: 90vh;
 	width: max-content;
+	overflow: scroll;
 	border-radius: 4px;
 
 	@media (max-width: 520px) {
