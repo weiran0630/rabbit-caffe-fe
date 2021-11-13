@@ -8,7 +8,7 @@ import imgSrc from 'public/images/hero-image.jpg';
 import ButtonLink from '@/components/common/ButtonLink';
 import Modal from '@/components/common/Modal';
 import { useState } from 'react';
-import CheckoutSuccess from 'checkout/CheckoutSuccess';
+import CheckoutSuccess from '@/components/checkout/CheckoutSuccess';
 
 const Home: NextPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(true);

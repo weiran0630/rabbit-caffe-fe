@@ -9,7 +9,7 @@ import {
 	handleAddAmount,
 	handleReduceAmount,
 } from 'functions/cartManipulate';
-import Checkout from 'checkout';
+import Checkout from '@/components/checkout';
 
 export default function Cart() {
 	const devEnv = process.env.NODE_ENV === 'development';
