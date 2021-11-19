@@ -13,6 +13,7 @@ import { FormStyled } from '@/components/form/FormStyled';
 import { Others } from '@/components/form/Others';
 import Modal from '@/components/common/Modal';
 import ForgotPasswordForm from './ForgotPasswordForm';
+import useLocale from 'hooks/useLocale';
 
 interface LoginFormValues {
 	email: string;
@@ -20,6 +21,7 @@ interface LoginFormValues {
 }
 
 export default function LoginForm() {
+	const t = useLocale();
 	const [unauthorize, setUnauthorize] = useState(false);
 	const [serverError, setServerError] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,53 +68,49 @@ export default function LoginForm() {
 			)}
 
 			<FormStyled onSubmit={onSubmit}>
-				<h2>會員登入</h2>
+				<h2>{t.login.title}</h2>
 				<input
 					type='email'
-					placeholder='電郵 Email'
+					placeholder={`${t.login.email}`}
 					{...register('email', {
-						required: '*電郵欄位必填',
+						required: t.login.emailRequired,
 					})}
 				/>
 				{errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-				{unauthorize && (
-					<ErrorMessage>
-						*用戶電郵或密碼存在錯誤，請確認輸入是否正確
-					</ErrorMessage>
-				)}
+				{unauthorize && <ErrorMessage>{t.login.unauthorize}</ErrorMessage>}
 
 				<input
 					type='password'
-					placeholder='密碼 Password'
+					placeholder={`${t.login.password}`}
 					{...register('password', {
-						required: '*密碼欄位必填',
+						required: t.login.passwordRequired,
 					})}
 				/>
 				{errors.password && (
 					<ErrorMessage>{errors.password.message}</ErrorMessage>
 				)}
-				{serverError && <ErrorMessage>*發生異常錯誤，請稍後再試</ErrorMessage>}
+				{serverError && <ErrorMessage>{t.login.serverError}</ErrorMessage>}
 
 				<CredentialLogin>
-					<ButtonStyled onClick={onSubmit}>登入</ButtonStyled>
+					<ButtonStyled onClick={onSubmit}>{t.login.button}</ButtonStyled>
 
 					<Others>
 						<Link href='/register' passHref>
-							<span className='other'>沒有帳號？加入會員</span>
+							<span className='other'>{t.login.noAccount}</span>
 						</Link>
 						<span className='other' onClick={onForgotPassword}>
-							忘記密碼
+							{t.login.forgetPwd}
 						</span>
 					</Others>
 				</CredentialLogin>
 
-				<Separator>或者你可以</Separator>
+				<Separator>{t.login.orUCan}</Separator>
 
 				<GoogleLoginButton
 					onClick={() => signIn('google')}
 					iconSize='1rem'
 					style={buttonConfig}>
-					以 Google 帳號登入
+					{t.login.googleLogin}
 				</GoogleLoginButton>
 			</FormStyled>
 		</>

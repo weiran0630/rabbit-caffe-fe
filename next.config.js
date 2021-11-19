@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 module.exports = {
 	reactStrictMode: true,
 	images: {
@@ -7,5 +8,9 @@ module.exports = {
 			'rabbit-caffe-be.herokuapp.com',
 			'localhost',
 		],
+	},
+	i18n: {
+		locales: ['zh-TW', 'en', 'ja'],
+		defaultLocale: 'zh-TW',
 	},
 };

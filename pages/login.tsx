@@ -4,6 +4,23 @@ import { getSession } from 'next-auth/client';
 import styled from '@emotion/styled';
 
 import LoginForm from '@/components/form/login/LoginForm';
+import { GetServerSidePropsContext } from 'next';
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const locale = context.locale || process.env.NEXT_LOCALE;
+	const session = await getSession(context);
+
+	if (session) {
+		return {
+			redirect: {
+				locale,
+				destination: '/member',
+				permanent: false,
+			},
+		};
+	}
+	return { props: { session, locale } };
+}
 
 export default function Login() {
 	return (
@@ -21,20 +38,6 @@ export default function Login() {
 			</Container>
 		</>
 	);
-}
-
-export async function getServerSideProps(context: any) {
-	const session = await getSession(context);
-
-	if (session) {
-		return {
-			redirect: {
-				destination: '/member',
-				permanent: false,
-			},
-		};
-	}
-	return { props: { session } };
 }
 
 const Container = styled.div`

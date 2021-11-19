@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 
+import useLocale from 'hooks/useLocale';
 import { AppContext } from 'context/AppContext';
 import {
 	getTotalPrice,
@@ -12,6 +13,7 @@ import {
 import Checkout from '@/components/checkout';
 
 export default function Cart() {
+	const t = useLocale();
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,16 +21,16 @@ export default function Cart() {
 
 	return (
 		<Container>
-			<h2 className='main-title'>您的購物車</h2>
+			<h2 className='main-title'>{t.cart.title}</h2>
 			{cartItems.length ? (
 				<>
 					<table>
 						<thead>
 							<tr>
-								<th>商品</th>
-								<th>單價</th>
-								<th>數量</th>
-								<th className='item-total'>小計</th>
+								<th>{t.cart.product}</th>
+								<th>{t.cart.unitPrice}</th>
+								<th>{t.cart.quantity}</th>
+								<th className='item-total'>{t.cart.subtotal}</th>
 							</tr>
 						</thead>
 
@@ -91,7 +93,7 @@ export default function Cart() {
 					<div className='checkout'>
 						<div>
 							<p className='cart-total'>
-								<span>總金額：</span>${getTotalPrice(cartItems)}
+								<span>{t.cart.totalPrice}：</span>${getTotalPrice(cartItems)}
 							</p>
 						</div>
 					</div>
@@ -100,8 +102,8 @@ export default function Cart() {
 				</>
 			) : (
 				<div className='empty'>
-					<p>購物車爲空</p>
-					<p>回到商品頁立即購物～</p>
+					<p>{t.cart.empty1}</p>
+					<p>{t.cart.empty2}</p>
 				</div>
 			)}
 		</Container>

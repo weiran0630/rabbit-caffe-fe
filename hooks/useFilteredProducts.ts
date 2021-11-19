@@ -1,7 +1,7 @@
 import { AppContext } from '../context/AppContext';
 import { useContext } from 'react';
 import { IProduct } from './../models/interfaces/index';
-import { SiOrigin } from 'react-icons/si';
+
 export default function useFilteredProducts(
 	allProducts: IProduct[] | undefined
 ): IProduct[] | undefined {

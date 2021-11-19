@@ -4,6 +4,8 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import Providers from 'next-auth/providers';
 import axios from 'axios';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const options: NextAuthOptions = {
 	providers: [
 		Providers.Google({
@@ -23,13 +25,10 @@ const options: NextAuthOptions = {
 			},
 			async authorize(credentials) {
 				try {
-					const { data } = await axios.post(
-						`${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
-						{
-							identifier: credentials.email,
-							password: credentials.password,
-						}
-					);
+					const { data } = await axios.post(`${API_URL}/auth/local`, {
+						identifier: credentials.email,
+						password: credentials.password,
+					});
 
 					if (data) {
 						return data;
@@ -54,7 +53,7 @@ const options: NextAuthOptions = {
 				switch (account?.provider) {
 					case 'google':
 						const { data } = await axios.get(
-							`${process.env.NEXT_PUBLIC_API_URL}/auth/${account?.provider}/callback?access_token=${account?.accessToken}`
+							`${API_URL}/auth/${account?.provider}/callback?access_token=${account?.accessToken}`
 						);
 
 						token.jwt = data.jwt;

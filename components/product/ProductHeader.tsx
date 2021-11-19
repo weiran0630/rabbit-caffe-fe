@@ -4,8 +4,11 @@ import { AppContext } from 'context/AppContext';
 import useSWRImmutable from 'swr/immutable';
 import fetcher from 'functions/fetcher';
 import { ICategory } from 'models/interfaces';
+import useLocale from 'hooks/useLocale';
 
 export default function ProductHeader() {
+	const t = useLocale();
+
 	const {
 		filter: { categoryId, ...filter },
 		setFilter,
@@ -21,7 +24,7 @@ export default function ProductHeader() {
 			<span
 				className={`clickable ${categoryId === null ? 'active' : ''}`}
 				onClick={() => setFilter({ ...filter, categoryId: null })}>
-				所有系列
+				{t.header.allSeries}
 			</span>
 			{categories?.map(category => (
 				<span

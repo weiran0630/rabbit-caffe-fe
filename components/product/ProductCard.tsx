@@ -33,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 			<div className='bottom'>
 				<RoastLevelRepresent roastLevel={product.roast_level} />
 				<p className='price'>
-					<IoPricetagSharp /> ${product.price}
+					<IoPricetagSharp /> ${product.price} TWD
 				</p>
 			</div>
 		</Card>

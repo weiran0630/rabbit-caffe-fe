@@ -12,6 +12,7 @@ interface ForgotPasswordFormValues {
 }
 
 export default function ForgotPasswordForm() {
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const [serverError, setServerError] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
@@ -25,10 +26,7 @@ export default function ForgotPasswordForm() {
 	const onSubmit = async ({ email }: ForgotPasswordFormValues) => {
 		setIsLoading(true);
 		try {
-			await axios.post(
-				`${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`,
-				{ email }
-			);
+			await axios.post(`${API_URL}/auth/forgot-password`, { email });
 			setServerError(false);
 			setIsSuccess(true);
 			setIsLoading(false);

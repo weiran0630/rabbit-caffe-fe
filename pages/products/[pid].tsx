@@ -16,14 +16,16 @@ import { AppContext } from 'context/AppContext';
 import { IProduct } from 'models/interfaces';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
+import useLocale from 'hooks/useLocale';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 	let products = await fetcher<IProduct[]>('/products');
 	products = products.filter((_, index) => index <= 10);
 
 	const paths = products.map(product => {
 		return {
 			params: {
+				locale: 'zh-Hant',
 				pid: product.id.toString(),
 			},
 		};
@@ -51,6 +53,7 @@ export const getStaticProps: GetStaticProps<GetStaticPropsType, IParams> =
 export default function ProductDetailsPage({
 	product,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+	const t = useLocale();
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
@@ -72,7 +75,7 @@ export default function ProductDetailsPage({
 	};
 
 	const notifyAddItem = () =>
-		toast('商品已加到購物車～', {
+		toast(t.productDetails.toast, {
 			position: 'top-right',
 			hideProgressBar: true,
 			icon: <FcCheckmark size={30} />,
@@ -114,19 +117,19 @@ export default function ProductDetailsPage({
 						<h2 className='title'>{product.title}</h2>
 						<h3 className='company'>{product.company.com_name}</h3>
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
-						<h2 className='price'>$ {product.price}</h2>
+						<h2 className='price'>$ {product.price} TWD</h2>
 
 						<ButtonStyled
 							onClick={() => {
 								setCartItems(handleAddToCart(product));
 								notifyAddItem();
 							}}>
-							加入購物車
+							{t.productDetails.addToCart}
 						</ButtonStyled>
 
-						<h4 className='description'>內容量：</h4>
+						<h4 className='description'>{t.productDetails.unit}：</h4>
 						<p className='actual-desc'>{product.unit}</p>
-						<h4 className='description'>商品描述：</h4>
+						<h4 className='description'>{t.productDetails.description}：</h4>
 						<Markdown className='actual-desc'>{product.description}</Markdown>
 					</Info>
 				</Section>

@@ -1,6 +1,24 @@
 import React from 'react';
 import { getSession, useSession } from 'next-auth/client';
 import { signOut } from 'next-auth/client';
+import { GetServerSidePropsContext } from 'next';
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+	const locale = context.locale || process.env.NEXT_LOCALE;
+	const session = await getSession(context);
+
+	if (!session) {
+		return {
+			redirect: {
+				locale,
+				destination: '/login',
+				permanent: false,
+			},
+		};
+	}
+
+	return { props: { session } };
+}
 
 export default function Member() {
 	const [session, loading] = useSession();
@@ -12,19 +30,4 @@ export default function Member() {
 			<button onClick={() => signOut()}>Logout</button>
 		</div>
 	);
-}
-
-export async function getServerSideProps(context: any) {
-	const session = await getSession(context);
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/login',
-				permanent: false,
-			},
-		};
-	}
-
-	return { props: { session } };
 }

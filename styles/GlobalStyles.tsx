@@ -18,6 +18,7 @@ export default function GlobalStyles() {
 					background-repeat: no-repeat;
 					background-attachment: fixed;
 					backdrop-filter: contrast(1.5) blur(5px) saturate(0.1);
+					-webkit-backdrop-filter: contrast(1.5) blur(5px) saturate(0.1);
 				}
 
 				.hero-image,

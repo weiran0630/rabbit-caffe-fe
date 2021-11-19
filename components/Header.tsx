@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import { useSession } from 'next-auth/client';
 import { SiRabbitmq } from 'react-icons/si';
+import { MdOutlineLanguage } from 'react-icons/md';
 import {
 	IoPersonCircleSharp,
 	IoHomeSharp,
@@ -16,11 +17,15 @@ import Modal from './common/Modal';
 import Cart from './cart/Cart';
 import { AppContext } from 'context/AppContext';
 import { CartItemType } from 'models/interfaces';
+import useLocale from 'hooks/useLocale';
+import I18nSwitcher from './I18nSwitcher';
 
 export default function Header() {
 	const router = useRouter();
+	const t = useLocale();
 	const [session, _] = useSession();
 	const [isCartOpen, setIsCartOpen] = useState(false);
+	const [isSwitchLangOpen, setIsSwitchLang] = useState(false);
 	const { cartItems } = useContext(AppContext);
 
 	const getTotalAmount = (allItems: CartItemType[]) => {
@@ -35,6 +40,12 @@ export default function Header() {
 			{isCartOpen && (
 				<Modal setIsDisplay={setIsCartOpen}>
 					<Cart />
+				</Modal>
+			)}
+
+			{isSwitchLangOpen && (
+				<Modal setIsDisplay={setIsSwitchLang}>
+					<I18nSwitcher />
 				</Modal>
 			)}
 
@@ -53,14 +64,14 @@ export default function Header() {
 					<Link href='/' passHref shallow>
 						<span className='clickable'>
 							<IoHomeSharp className='logo' size={20} />
-							<span>主頁</span>
+							<span>{t.header.homepage}</span>
 						</span>
 					</Link>
 
 					<Link href='/products' passHref shallow>
 						<span className='clickable'>
 							<IoCafeSharp size={20} />
-							<span>所有商品</span>
+							<span>{t.header.allProduct}</span>
 						</span>
 					</Link>
 
@@ -68,14 +79,14 @@ export default function Header() {
 						<Link href='/member' passHref shallow>
 							<span className='clickable'>
 								<IoPersonCircleSharp size={20} />
-								<span>會員專區</span>
+								<span>{t.header.member}</span>
 							</span>
 						</Link>
 					) : (
 						<Link href='/login' passHref shallow>
 							<span className='clickable'>
 								<IoPersonCircleSharp size={20} />
-								<span>加入會員/登錄</span>
+								<span>{t.header.login}</span>
 							</span>
 						</Link>
 					)}
@@ -91,7 +102,14 @@ export default function Header() {
 							<IoCartSharp size={20} />
 						</span>
 
-						<span>購物車</span>
+						<span>{t.header.cart}</span>
+					</span>
+
+					<span
+						className='clickable'
+						onClick={() => setIsSwitchLang(!isSwitchLangOpen)}>
+						<MdOutlineLanguage size={20} />
+						<span>{t.header.switchLang}</span>
 					</span>
 				</Nav>
 
@@ -113,6 +131,7 @@ const Container = styled.header`
 	align-items: center;
 	background-color: #fefefee0;
 	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
 	box-shadow: 0px 1px 3px 1px #00000018;
 
 	@media (max-width: 728px) {
@@ -168,7 +187,7 @@ const Nav = styled.nav`
 			background-color: #533a3268;
 		}
 
-		@media (max-width: 559px) {
+		@media (max-width: 664px) {
 			padding: 10px;
 			span {
 				display: none;
@@ -200,7 +219,7 @@ const Nav = styled.nav`
 	}
 	@media (max-width: 559px) {
 		width: 100%;
-		justify-content: space-between;
+		justify-content: center;
 		padding: 0 3rem 1rem 3rem;
 	}
 `;

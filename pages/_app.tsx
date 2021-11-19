@@ -6,7 +6,7 @@ import { AppContext, contextDefaultValue } from 'context/AppContext';
 import GlobalStyles from 'styles/GlobalStyles';
 import Header from '@/components/Header';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
 	const [filter, setFilter] = useState(contextDefaultValue.filter);
 	const [cartItems, setCartItems] = useState(contextDefaultValue.cartItems);
 
@@ -20,4 +20,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 			</AppContext.Provider>
 		</AuthProvider>
 	);
-}
+};
+
+export default MyApp;

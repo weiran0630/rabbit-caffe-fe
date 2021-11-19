@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import {
 	PaymentElement,
 	useStripe,
 	useElements,
 } from '@stripe/react-stripe-js';
+import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
+import { useSession } from 'next-auth/client';
+
+import useLocale from 'hooks/useLocale';
+import { AppContext } from 'context/AppContext';
 import { FormStyled } from '@/components/form/FormStyled';
 import { ErrorMessage } from '@/components/form/Message';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
-import styled from '@emotion/styled';
-import { useSession } from 'next-auth/client';
-import { AppContext } from 'context/AppContext';
 import { getTotalPrice } from 'functions/cartManipulate';
 
 interface CheckoutFormProps {
@@ -19,12 +22,17 @@ interface CheckoutFormProps {
 
 export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 	const devEnv = process.env.NODE_ENV === 'development';
+	const { locale } = useRouter();
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
+	const t = useLocale();
 	const stripe = useStripe();
 	const elements = useElements();
 	const [session] = useSession();
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const { cartItems } = useContext(AppContext);
+
+	console.log(`https://rabbit-caffe.tw/${locale}`);
 
 	const {
 		handleSubmit,
@@ -40,7 +48,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 		setIsLoading(true);
 
 		// create an order and confirm it on CMS manually afterward
-		await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+		await fetch(`${API_URL}/orders`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -56,9 +64,9 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: `${
-					devEnv ? 'http://localhost:3000' : 'https://rabbit-caffe.vercel.app'
-				}`,
+				return_url: devEnv
+					? `http://localhost:3000/${locale}`
+					: `https://rabbit-caffe.tw/${locale}`,
 				receipt_email: values.email,
 				shipping: { address: { line1: values.address }, name: values.name },
 			},
@@ -75,29 +83,29 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 
 	return (
 		<FormStyled onSubmit={submitOrder}>
-			<h2>結帳</h2>
+			<h2></h2>
 			<input
-				{...register('name', { required: '*姓名爲必填' })}
-				placeholder='姓名 Full name'
+				{...register('name', { required: t.checkout.fullnameRequired })}
+				placeholder={t.checkout.fullname}
 			/>
 			{errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
 
 			<input
 				{...register('email', {
-					required: '*電郵爲必填',
+					required: t.checkout.emailRequired,
 					value: session?.user?.email,
 					pattern: {
 						value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-						message: '*非法電郵格式',
+						message: t.checkout.emailInvalid,
 					},
 				})}
-				placeholder='電郵 Email'
+				placeholder={t.checkout.email}
 			/>
 			{errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
 			<input
-				{...register('address', { required: '*送貨地址爲必填' })}
-				placeholder='送貨地址 Shipping address'
+				{...register('address', { required: t.checkout.addressRequired })}
+				placeholder={t.checkout.address}
 			/>
 			{errors.address && <ErrorMessage>{errors.address.message}</ErrorMessage>}
 
@@ -109,7 +117,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 			<ButtonStyled
 				onClick={submitOrder}
 				isDisable={isLoading || !stripe || !elements || !errors}>
-				結帳
+				{t.checkout.button}
 			</ButtonStyled>
 		</FormStyled>
 	);

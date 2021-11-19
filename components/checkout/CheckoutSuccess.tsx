@@ -3,17 +3,22 @@ import styled from '@emotion/styled';
 import { IoCheckmarkCircleSharp } from 'react-icons/io5';
 
 import { ButtonStyled } from '@/components/common/ButtonStyled';
+import useLocale from 'hooks/useLocale';
 
 interface CheckoutSuccess {
 	setIsDisplay: (isDisplay: boolean) => void;
 }
 
 export default function CheckoutSuccess({ setIsDisplay }: CheckoutSuccess) {
+	const t = useLocale();
+
 	return (
 		<Container>
 			<IoCheckmarkCircleSharp size={100} className='success-icon' />
-			<h2>付款成功</h2>
-			<ButtonStyled onClick={() => setIsDisplay(false)}>關閉提示</ButtonStyled>
+			<h2>{t.checkout.successMessage}</h2>
+			<ButtonStyled onClick={() => setIsDisplay(false)}>
+				{t.checkout.closeModal}
+			</ButtonStyled>
 		</Container>
 	);
 }

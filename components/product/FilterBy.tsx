@@ -7,8 +7,11 @@ import fetcher from 'functions/fetcher';
 import { AppContext } from 'context/AppContext';
 import { ICompany, IPlaceOrigin, IRoastLevel } from 'models/interfaces';
 import { Separator } from '@/components/common/Separator';
+import useLocale from 'hooks/useLocale';
 
 export default function FilterBy() {
+	const t = useLocale();
+
 	const { data: placeOrigins } = useSWRImmutable<IPlaceOrigin[]>(
 		'/place-origins?_sort=id',
 		fetcher
@@ -33,11 +36,11 @@ export default function FilterBy() {
 
 	return (
 		<Container>
-			<h3>分類</h3>
+			<h3>{t.productsIndex.filter.heading}</h3>
 			<Separator primary />
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setOriginOpen(!originOpen)}>
-					原產地 <AiOutlinePlus />
+					{t.productsIndex.filter.origin} <AiOutlinePlus />
 				</h4>
 				<Separator />
 				<ul className={`list ${(originOpen || placeOriginId) && 'active'}`}>
@@ -66,14 +69,14 @@ export default function FilterBy() {
 								...filter,
 							})
 						}>
-						取消選取
+						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>
 			</div>
 
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setRoastLvOpen(!roastLvOpen)}>
-					烘焙程度 <AiOutlinePlus />
+					{t.productsIndex.filter.roastLevel} <AiOutlinePlus />
 				</h4>
 				<Separator />
 				<ul className={`list ${(roastLvOpen || roastLevelId) && 'active'}`}>
@@ -102,14 +105,14 @@ export default function FilterBy() {
 								...filter,
 							})
 						}>
-						取消選取
+						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>
 			</div>
 
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setCompanyOpen(!companyOpen)}>
-					品牌 <AiOutlinePlus />
+					{t.productsIndex.filter.company} <AiOutlinePlus />
 				</h4>
 				<Separator />
 				<ul className={`list ${(companyId || companyOpen) && 'active'}`}>
@@ -138,7 +141,7 @@ export default function FilterBy() {
 								...filter,
 							})
 						}>
-						取消選取
+						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>
 			</div>

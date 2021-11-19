@@ -3,6 +3,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
 
 import CheckoutForm from './CheckoutForm';
+import { useRouter } from 'next/router';
 
 const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PK}`);
 
@@ -11,6 +12,7 @@ interface CheckoutProps {
 }
 
 export default function Checkout({ total }: CheckoutProps) {
+	const router = useRouter();
 	const [clientSecret, setClientSecret] = useState('');
 	const [paymentIntentId, setPaymentIntentId] = useState('');
 
@@ -47,7 +49,11 @@ export default function Checkout({ total }: CheckoutProps) {
 			},
 		},
 	};
-	const options = { clientSecret, appearance } as StripeElementsOptions;
+	const options = {
+		clientSecret,
+		appearance,
+		locale: router.locale,
+	} as StripeElementsOptions;
 
 	return (
 		<>

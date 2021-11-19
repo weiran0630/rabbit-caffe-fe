@@ -19,6 +19,7 @@ interface RegisterFormValues {
 }
 
 export default function RegisterForm() {
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const [isUsed, setIsUsed] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,10 +31,9 @@ export default function RegisterForm() {
 
 	const onSubmit = async (values: RegisterFormValues) => {
 		try {
-			const response = await axios.post(
-				`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`,
-				{ ...values }
-			);
+			const response = await axios.post(`${API_URL}/auth/local/register`, {
+				...values,
+			});
 
 			if (response.data.user) {
 				setIsModalOpen(true);

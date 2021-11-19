@@ -34,9 +34,11 @@ const Container = styled.div`
 	top: -2rem;
 
 	h1 {
+		width: 100%;
 		font-weight: 100;
 		display: flex;
-		align-items: center;
+		justify-content: center;
+		text-align: center;
 		margin: -1.5rem 0 0.5rem 0;
 	}
 `;

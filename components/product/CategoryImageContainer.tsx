@@ -3,14 +3,16 @@ import Image from 'next/image';
 import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
 
-import fetcher from 'functions/fetcher';
-import { AppContext } from 'context/AppContext';
-import allProductImg from 'public/images/all-products.jpg';
+import useLocale from 'hooks/useLocale';
 import { ICategory } from 'models/interfaces';
+import { AppContext } from 'context/AppContext';
+import fetcher from 'functions/fetcher';
+import allProductImg from 'public/images/all-products.jpg';
 
 export default function CategoryImageContainer() {
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
+	const t = useLocale();
 
 	const {
 		filter: { categoryId },
@@ -22,7 +24,7 @@ export default function CategoryImageContainer() {
 	);
 
 	let imgSrc = allProductImg.src;
-	let categoryHeader = '所有系列';
+	let categoryHeader = t.header.allSeries;
 
 	if (categories && categoryId) {
 		const url = categories[categoryId - (devEnv ? 2 : 3)].cate_image!.url;

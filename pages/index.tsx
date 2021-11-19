@@ -1,18 +1,19 @@
-import type { NextPage } from 'next';
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import imgSrc from 'public/images/hero-image.jpg';
 
+import useLocale from 'hooks/useLocale';
 import ButtonLink from '@/components/common/ButtonLink';
 import Modal from '@/components/common/Modal';
-import { useState } from 'react';
 import CheckoutSuccess from '@/components/checkout/CheckoutSuccess';
 
-const Home: NextPage = () => {
-	const [isModalOpen, setIsModalOpen] = useState(true);
+export default function Home() {
 	const router = useRouter();
+	const t = useLocale();
+	const [isModalOpen, setIsModalOpen] = useState(true);
 
 	return (
 		<>
@@ -43,7 +44,7 @@ const Home: NextPage = () => {
 							GOOD COFFEE
 						</h2>
 
-						<ButtonLink href='/products'>開始探索</ButtonLink>
+						<ButtonLink href='/products'>{t.homepage.button}</ButtonLink>
 					</div>
 				</Section>
 
@@ -61,7 +62,7 @@ const Home: NextPage = () => {
 			</Container>
 		</>
 	);
-};
+}
 
 const Container = styled.div`
 	width: 100vw;
@@ -117,5 +118,3 @@ const ImageContainer = styled.div`
 		height: 90vh;
 	}
 `;
-
-export default Home;
