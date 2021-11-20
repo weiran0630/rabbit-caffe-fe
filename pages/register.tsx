@@ -3,7 +3,7 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 import { getSession } from 'next-auth/client';
 
-import RegisterForm from '@/components/form/register/RegisterForm';
+import RegisterForm from '@/components/register/RegisterForm';
 import { GetServerSidePropsContext } from 'next';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

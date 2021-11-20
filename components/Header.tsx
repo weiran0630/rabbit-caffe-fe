@@ -45,7 +45,7 @@ export default function Header() {
 
 			{isSwitchLangOpen && (
 				<Modal setIsDisplay={setIsSwitchLang}>
-					<I18nSwitcher />
+					<I18nSwitcher setIsDisplay={setIsSwitchLang} />
 				</Modal>
 			)}
 

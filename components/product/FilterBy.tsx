@@ -154,11 +154,11 @@ const Container = styled.div`
 	min-width: 25vw;
 
 	h3 {
-		color: #a5a5a5;
 		margin-bottom: 0.3em;
 	}
 
 	.title {
+		color: #a5a5a5;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
