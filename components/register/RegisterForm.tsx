@@ -10,6 +10,7 @@ import { FormStyled } from '@/components/form/FormStyled';
 import { Others } from '@/components/form/Others';
 import Modal from '@/components/common/Modal';
 import RegisterSuccess from './RegisterSuccess';
+import useLocale from 'hooks/useLocale';
 
 interface RegisterFormValues {
 	username: string;
@@ -19,6 +20,7 @@ interface RegisterFormValues {
 }
 
 export default function RegisterForm() {
+	const t = useLocale();
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const [isUsed, setIsUsed] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,19 +48,37 @@ export default function RegisterForm() {
 	};
 
 	const username = register('username', {
-		required: '*用戶名欄位必填',
+		required: t.register.usernameRequired,
 		pattern: {
 			value: /^\w{4,20}$/,
-			message: '*用戶名要求4至20個字元之間，字元限定爲數字字母與底線',
+			message: t.register.invalidUsername,
 		},
 	});
 
 	const email = register('email', {
-		required: '*電郵欄位必填',
+		required: t.register.emailRequired,
 		pattern: {
 			value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-			message: '*非法電郵格式',
+			message: t.register.invalidEmail,
 		},
+	});
+
+	const password = register('password', {
+		required: t.register.passwordRequired,
+		pattern: {
+			value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+			message: t.register.invalidPassword,
+		},
+	});
+
+	const confirm = register('confirm', {
+		required: t.register.confirmRequired,
+		validate: value =>
+			value === getValues('password') || t.register.invalidConfirm,
+	});
+
+	const bDay = register('birthday', {
+		required: t.register.bDayRequired,
 	});
 
 	return (
@@ -70,11 +90,11 @@ export default function RegisterForm() {
 			)}
 
 			<FormStyled onSubmit={handleSubmit(onSubmit)}>
-				<h2>加入會員</h2>
+				<h2>{t.register.title}</h2>
 
 				<input
 					type='text'
-					placeholder='用戶名 Username'
+					placeholder={`${t.register.username}`}
 					{...username}
 					onChange={e => {
 						username.onChange(e);
@@ -88,7 +108,7 @@ export default function RegisterForm() {
 
 				<input
 					type='email'
-					placeholder='電郵 Email'
+					placeholder={`${t.register.email}`}
 					{...email}
 					onChange={e => {
 						email.onChange(e);
@@ -99,14 +119,8 @@ export default function RegisterForm() {
 
 				<input
 					type='password'
-					placeholder='密碼 Password'
-					{...register('password', {
-						required: '*密碼欄位必填',
-						pattern: {
-							value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-							message: '*密碼要求8個字元以上，需包含大小寫英文字母以及數字',
-						},
-					})}
+					placeholder={`${t.register.password}`}
+					{...password}
 				/>
 				{errors.password && (
 					<ErrorMessage>{errors.password.message}</ErrorMessage>
@@ -114,36 +128,29 @@ export default function RegisterForm() {
 
 				<input
 					type='password'
-					placeholder='確認密碼 Confirm Password'
-					{...register('confirm', {
-						required: '*確認密碼欄位必填',
-						validate: value =>
-							value === getValues('password') || '*確認密碼與密碼不相符',
-					})}
+					placeholder={`${t.register.confirm}`}
+					{...confirm}
 				/>
 				{errors.confirm && (
 					<ErrorMessage>{errors.confirm.message}</ErrorMessage>
 				)}
 
 				<div className='birthday'>
-					<label htmlFor='birthday'>出生日期： </label>
-					<DateInput
-						type='date'
-						{...register('birthday', {
-							required: '*出生日期必填',
-						})}
-					/>
+					<label htmlFor='birthday'>{`${t.register.bDayLabel}`} </label>
+					<DateInput type='date' {...bDay} />
 					{errors.birthday && (
 						<ErrorMessage>{errors.birthday.message}</ErrorMessage>
 					)}
 				</div>
 
 				<Container>
-					<ButtonStyled onClick={handleSubmit(onSubmit)}>註冊會員</ButtonStyled>
+					<ButtonStyled onClick={handleSubmit(onSubmit)}>
+						{t.register.button}
+					</ButtonStyled>
 
 					<Others>
 						<Link href='/login' passHref>
-							<span className='other'>已有帳號？登錄會員</span>
+							<span className='other'>{t.register.hasAccount}</span>
 						</Link>
 					</Others>
 				</Container>

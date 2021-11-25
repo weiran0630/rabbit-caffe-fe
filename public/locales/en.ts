@@ -40,6 +40,27 @@ export const en = {
 		passwordRequired: '*Password is required',
 		serverError: '*An abnormal error occurs. Please try again later.',
 	},
+	register: {
+		title: 'Become a membership',
+		username: 'Username',
+		invalidUsername:
+			'*The username must be between 4 to 20 characters. Only English characters, numbers, and dashes are allowed.',
+		usernameRequired: '*Username is required',
+		email: 'Email Address',
+		invalidEmail: '*Invalid Email',
+		emailRequired: '*Email is required',
+		password: 'Password',
+		invalidPassword:
+			'*The password must at least contain 8 characters, require both capitalized, lower case letters and numbers.',
+		passwordRequired: '*Password is required',
+		confirm: 'Confirm Password',
+		invalidConfirm: '*Confirm password does not match',
+		confirmRequired: '*Password is required',
+		bDayLabel: 'Birthday：',
+		bDayRequired: '*Birthday is required',
+		hasAccount: 'Has an account? Login now!',
+		button: 'Create Account',
+	},
 	cart: {
 		title: 'My Cart',
 		empty1: 'Your cart is empty',
