@@ -26,6 +26,7 @@ export default function RegisterForm() {
 	const {
 		register,
 		handleSubmit,
+		getValues,
 		formState: { errors },
 	} = useForm();
 
@@ -109,6 +110,19 @@ export default function RegisterForm() {
 				/>
 				{errors.password && (
 					<ErrorMessage>{errors.password.message}</ErrorMessage>
+				)}
+
+				<input
+					type='password'
+					placeholder='確認密碼 Confirm Password'
+					{...register('confirm', {
+						required: '*確認密碼欄位必填',
+						validate: value =>
+							value === getValues('password') || '*確認密碼與密碼不相符',
+					})}
+				/>
+				{errors.confirm && (
+					<ErrorMessage>{errors.confirm.message}</ErrorMessage>
 				)}
 
 				<div className='birthday'>

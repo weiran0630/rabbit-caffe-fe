@@ -11,6 +11,7 @@ export default function GlobalStyles() {
 				}
 
 				body {
+					scroll-behavior: smooth;
 					font-family: 'Noto Sans TC', sans-serif;
 					color: #533a32;
 					min-height: 100vh;
