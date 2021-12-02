@@ -28,6 +28,7 @@ export default function CategoryImageContainer() {
 
 	if (categories && categoryId) {
 		const url = categories[categoryId - (devEnv ? 2 : 3)].cate_image!.url;
+
 		imgSrc = devEnv ? API_URL + url : url;
 
 		categoryHeader = categories[categoryId - (devEnv ? 2 : 3)].cate_name;
@@ -35,15 +36,20 @@ export default function CategoryImageContainer() {
 
 	return (
 		<Container>
-			<Image
-				className='category-image'
-				src={imgSrc}
-				alt='category image'
-				width='100'
-				height='25'
-				layout='responsive'
-				priority
-			/>
+			<div className='filter'>
+				<Image
+					className='category-image'
+					src={imgSrc!}
+					alt='category image'
+					width='100'
+					height='25'
+					layout='responsive'
+					placeholder='blur'
+					blurDataURL={allProductImg.blurDataURL}
+					priority
+				/>
+			</div>
+
 			<h2 className='title'>{categoryHeader}</h2>
 		</Container>
 	);
@@ -53,6 +59,10 @@ const Container = styled.div`
 	user-select: none;
 	position: relative;
 	width: 100%;
+
+	.filter {
+		filter: brightness(0.6);
+	}
 
 	.title {
 		font-size: 3rem;

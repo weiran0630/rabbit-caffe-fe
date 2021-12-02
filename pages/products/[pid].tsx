@@ -25,7 +25,6 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 	const paths = products.map(product => {
 		return {
 			params: {
-				locale: 'zh-Hant',
 				pid: product.id.toString(),
 			},
 		};
@@ -57,6 +56,8 @@ export default function ProductDetailsPage({
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
+
+	const imgSrc = devEnv ? API_URL + product.image[0].url : product.image[0].url;
 
 	const { cartItems: previousCart, setCartItems } = useContext(AppContext);
 
@@ -99,9 +100,7 @@ export default function ProductDetailsPage({
 					<div>
 						<Image
 							className='product-detail'
-							src={
-								devEnv ? API_URL + product.image[0].url : product.image[0].url
-							}
+							src={imgSrc}
 							alt='product image'
 							width='30'
 							height='30'

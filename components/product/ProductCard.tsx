@@ -16,13 +16,15 @@ export default function ProductCard({ product }: ProductCardProps) {
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const router = useRouter();
 
+	const imgSrc = devEnv ? API_URL + product.image[0].url : product.image[0].url;
+
 	return (
 		<Card onClick={() => router.push(`/products/${product.id}`)}>
 			<div className='top'>
 				<div className='img-container'>
 					<Image
 						className='product-image'
-						src={devEnv ? API_URL + product.image[0].url : product.image[0].url}
+						src={imgSrc}
 						layout='fill'
 						alt='product image'
 					/>
