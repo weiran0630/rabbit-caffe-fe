@@ -1,0 +1,8 @@
+# Block all crawlers for /member
+User-agent: *
+Disallow: /member
+Disallow: /reset-password
+
+# Allow all crawlers
+User-agent: *
+Allow: /
