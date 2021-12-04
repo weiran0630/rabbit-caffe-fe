@@ -46,6 +46,7 @@ export default function Cart() {
 														: item.image[0].url
 												}
 												alt={item.title}
+												quality={25}
 												width='100'
 												height='100'
 											/>

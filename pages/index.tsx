@@ -3,8 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
-import imgSrc from 'public/images/hero-image.jpg';
-
+import imgSrc from 'public/images/hero-image.webp';
 import useLocale from 'hooks/useLocale';
 import ButtonLink from '@/components/common/ButtonLink';
 import Modal from '@/components/common/Modal';

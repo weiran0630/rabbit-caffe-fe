@@ -6,7 +6,7 @@ import useLocale from 'hooks/useLocale';
 import { ICategory } from 'models/interfaces';
 import { AppContext } from 'context/AppContext';
 import fetcher from 'functions/fetcher';
-import allProductImg from 'public/images/all-products.jpg';
+import allProductImg from 'public/images/all-products.webp';
 
 export default function CategoryImageContainer() {
 	const devEnv = process.env.NODE_ENV === 'development';
@@ -42,6 +42,7 @@ export default function CategoryImageContainer() {
 					alt='category image'
 					width='100'
 					height='25'
+					quality={25}
 					layout='responsive'
 					placeholder='blur'
 					blurDataURL={allProductImg.blurDataURL}

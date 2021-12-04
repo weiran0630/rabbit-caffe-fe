@@ -15,7 +15,7 @@ export default function GlobalStyles() {
 					font-family: 'Noto Sans TC', sans-serif;
 					color: #533a32;
 					min-height: 100vh;
-					background-image: url('/images/bg.jpg');
+					background-image: url('/images/bg.webp');
 					background-repeat: no-repeat;
 					background-attachment: fixed;
 					backdrop-filter: contrast(1.5) blur(5px) saturate(0.1);
