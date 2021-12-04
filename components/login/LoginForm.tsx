@@ -5,7 +5,6 @@ import { signIn } from 'next-auth/client';
 import { useForm } from 'react-hook-form';
 import { GoogleLoginButton } from 'react-social-login-buttons';
 import { useRouter } from 'next/dist/client/router';
-
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { Separator } from '@/components/common/Separator';
 import { ErrorMessage } from '@/components/form/Message';

@@ -3,7 +3,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import styled from '@emotion/styled';
-
 import fetcher from 'functions/fetcher';
 import FilterBy from '@/components/product/FilterBy';
 import ProductList from '@/components/product/ProductList';

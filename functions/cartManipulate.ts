@@ -1,7 +1,29 @@
-import { CartItemType } from 'models/interfaces';
+import type { CartItemType, IProduct } from 'models/interfaces';
+
+export const handleAddToCart = (
+	clickedItem: IProduct,
+	previousCart: CartItemType[]
+) => {
+	const isItemInCart = previousCart.find(item => item.id === clickedItem.id);
+	let currentCart;
+
+	if (isItemInCart) {
+		// if item is already in cart => amount += 1
+		currentCart = previousCart.map(item =>
+			item.id === clickedItem.id ? { ...item, amount: item.amount + 1 } : item
+		);
+	} else {
+		// if doesn't => amount = 1
+		currentCart = [...previousCart, { ...clickedItem, amount: 1 }];
+	}
+
+	localStorage.setItem('cart', JSON.stringify(currentCart));
+
+	return currentCart;
+};
 
 export const handleAddAmount = (id: number, previousCart: CartItemType[]) => {
-	return previousCart.reduce((accumulator, item) => {
+	const currentCart = previousCart.reduce((accumulator, item) => {
 		// for the item that is clicked on
 		if (item.id === id) {
 			// return a array with clicked item amount + 1
@@ -11,13 +33,17 @@ export const handleAddAmount = (id: number, previousCart: CartItemType[]) => {
 			return [...accumulator, item];
 		}
 	}, [] as CartItemType[]);
+
+	localStorage.setItem('cart', JSON.stringify(currentCart));
+
+	return currentCart;
 };
 
 export const handleReduceAmount = (
 	id: number,
 	previousCart: CartItemType[]
 ) => {
-	return previousCart.reduce((accumulator, item) => {
+	const currentCart = previousCart.reduce((accumulator, item) => {
 		// for the item that is clicked on
 		if (item.id === id) {
 			/** if amount is 1,
@@ -30,6 +56,10 @@ export const handleReduceAmount = (
 			return [...accumulator, item];
 		}
 	}, [] as CartItemType[]);
+
+	localStorage.setItem('cart', JSON.stringify(currentCart));
+
+	return currentCart;
 };
 
 export const getTotalPrice = (cartItems: CartItemType[]) => {

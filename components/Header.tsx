@@ -11,7 +11,6 @@ import {
 	IoCafeSharp,
 	IoCartSharp,
 } from 'react-icons/io5';
-
 import ProductHeader from '@/components/product/ProductHeader';
 import Modal from './common/Modal';
 import Cart from './cart/Cart';
@@ -206,7 +205,7 @@ const Nav = styled.nav`
 				align-items: center;
 				top: -50%;
 				right: -50%;
-				font-size: 0.5rem;
+				font-size: 0.7rem;
 				height: 1rem;
 				width: 1rem;
 				padding: 2px 2px 3px 2px;

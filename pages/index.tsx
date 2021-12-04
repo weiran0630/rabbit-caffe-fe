@@ -54,7 +54,6 @@ export default function Home() {
 						src={imgSrc}
 						alt=' '
 						layout='fill'
-						quality='25'
 						placeholder='blur'
 						priority
 					/>

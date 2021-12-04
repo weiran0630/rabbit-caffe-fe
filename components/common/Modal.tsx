@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { IoCloseSharp } from 'react-icons/io5';
-
 import Confetti from 'react-confetti';
 
 interface ModalProps {

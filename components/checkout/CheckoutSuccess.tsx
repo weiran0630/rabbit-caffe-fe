@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { IoCheckmarkCircleSharp } from 'react-icons/io5';
-
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import useLocale from 'hooks/useLocale';
 

@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { IoPricetagSharp } from 'react-icons/io5';
-
 import { IProduct } from 'models/interfaces';
 import RoastLevelRepresent from './RoastLevelRepresent';
 import { useRouter } from 'next/router';

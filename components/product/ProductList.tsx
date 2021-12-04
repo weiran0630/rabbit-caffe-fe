@@ -2,7 +2,6 @@ import React from 'react';
 import styled from '@emotion/styled';
 import useSWRInfinite from 'swr/infinite';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
 import fetcher from 'functions/fetcher';
 import getKey from 'functions/getKey';
 import { IProduct } from 'models/interfaces';

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
-
 import useLocale from 'hooks/useLocale';
 import { ICategory } from 'models/interfaces';
 import { AppContext } from 'context/AppContext';

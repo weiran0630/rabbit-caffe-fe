@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/dist/client/router';
 import styled from '@emotion/styled';
 import { SiRabbitmq } from 'react-icons/si';
-
 import ButtonLink from '@/components/common/ButtonLink';
 
 export default function RegisterSuccess() {

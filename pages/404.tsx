@@ -2,7 +2,6 @@ import React from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import styled from '@emotion/styled';
-
 import ButtonLink from '@/components/common/ButtonLink';
 
 export default function Custom404() {

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
-
 import { IRoastLevel } from 'models/interfaces';
 import fetcher from 'functions/fetcher';
 

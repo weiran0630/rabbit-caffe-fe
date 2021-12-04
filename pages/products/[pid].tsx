@@ -10,15 +10,15 @@ import { IoArrowBackSharp } from 'react-icons/io5';
 import { FcCheckmark } from 'react-icons/fc';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import fetcher from 'functions/fetcher';
 import { AppContext } from 'context/AppContext';
 import { IProduct } from 'models/interfaces';
+import { handleAddToCart } from 'functions/cartManipulate';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
 import useLocale from 'hooks/useLocale';
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
 	let products = await fetcher<IProduct[]>('/products');
 	products = products.filter((_, index) => index <= 10);
 
@@ -61,20 +61,6 @@ export default function ProductDetailsPage({
 
 	const { cartItems: previousCart, setCartItems } = useContext(AppContext);
 
-	const handleAddToCart = (clickedItem: IProduct) => {
-		const isItemInCart = previousCart.find(item => item.id === clickedItem.id);
-
-		if (isItemInCart) {
-			return previousCart.map(item =>
-				// if item is already in cart => amount += 1
-				item.id === clickedItem.id ? { ...item, amount: item.amount + 1 } : item
-			);
-		} else {
-			// if doesn't => amount = 1
-			return [...previousCart, { ...clickedItem, amount: 1 }];
-		}
-	};
-
 	const notifyAddItem = () =>
 		toast(t.productDetails.toast, {
 			position: 'top-right',
@@ -113,6 +99,7 @@ export default function ProductDetailsPage({
 				<Section>
 					<Info>
 						<ToastContainer />
+
 						<h2 className='title'>{product.title}</h2>
 						<h3 className='company'>{product.company.com_name}</h3>
 						<RoastLevelRepresent roastLevel={product.roast_level} detail />
@@ -120,7 +107,7 @@ export default function ProductDetailsPage({
 
 						<ButtonStyled
 							onClick={() => {
-								setCartItems(handleAddToCart(product));
+								setCartItems(handleAddToCart(product, previousCart));
 								notifyAddItem();
 							}}>
 							{t.productDetails.addToCart}

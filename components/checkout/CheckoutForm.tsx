@@ -8,7 +8,6 @@ import {
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/client';
-
 import useLocale from 'hooks/useLocale';
 import { AppContext } from 'context/AppContext';
 import { FormStyled } from '@/components/form/FormStyled';
