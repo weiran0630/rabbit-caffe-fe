@@ -23,6 +23,11 @@ class MyDocument extends Document {
 						rel='stylesheet'
 						crossOrigin='anonymous'
 					/>
+
+					<meta
+						name='description'
+						content='Rabbit-themed coffee shop e-commerce website created with Next.js. Only for education propose, open sourced on Github.'
+					/>
 				</Head>
 				<body>
 					<Main />
