@@ -18,11 +18,11 @@ import { ButtonStyled } from '@/components/common/ButtonStyled';
 import RoastLevelRepresent from '@/components/product/RoastLevelRepresent';
 import useLocale from 'hooks/useLocale';
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 	let products = await fetcher<IProduct[]>('/products');
 	products = products.filter((_, index) => index <= 10);
 
-	const paths = products.map(product => {
+	const defaultPaths = products.map(product => {
 		return {
 			params: {
 				pid: product.id.toString(),
@@ -30,7 +30,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		};
 	});
 
-	return { paths, fallback: 'blocking' };
+	const enPaths = products.map(product => {
+		return {
+			params: {
+				pid: product.id.toString(),
+			},
+			locale: 'en',
+		};
+	});
+
+	const jaPaths = products.map(product => {
+		return {
+			params: {
+				pid: product.id.toString(),
+			},
+			locale: 'ja',
+		};
+	});
+
+	return {
+		paths: [...defaultPaths, ...enPaths, ...jaPaths],
+		fallback: 'blocking',
+	};
 };
 
 type GetStaticPropsType = {
