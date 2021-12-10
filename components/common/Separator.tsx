@@ -17,7 +17,7 @@ export const Separator = styled.div<SeparatorProps>`
 	&::after {
 		content: '';
 		flex: 1;
-		border-bottom: 1px solid
+		border-bottom: ${props => (props.primary ? '2px' : '1px')} solid
 			${props => (props.primary ? '#a5a5a5' : '#a5a5a58f')};
 	}
 

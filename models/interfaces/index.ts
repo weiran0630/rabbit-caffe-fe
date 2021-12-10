@@ -142,3 +142,25 @@ export interface IFilter {
 
 // concat IProduct with amount
 export type CartItemType = IProduct & { amount: number };
+
+export interface Role {
+	id: number;
+	name: string;
+	description: string;
+	type: string;
+}
+
+export interface User {
+	id: number;
+	username: string;
+	email: string;
+	provider: string;
+	confirmed: boolean;
+	blocked?: any;
+	role: Role;
+	address: string;
+	fullname?: any;
+	created_at: Date;
+	updated_at: Date;
+	profilePicture: IImage;
+}

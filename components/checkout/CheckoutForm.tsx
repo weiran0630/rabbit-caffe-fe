@@ -8,6 +8,7 @@ import {
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/client';
+import type { Session } from 'next-auth';
 import useLocale from 'hooks/useLocale';
 import { AppContext } from 'context/AppContext';
 import { FormStyled } from '@/components/form/FormStyled';
@@ -55,6 +56,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 				items: cartItems,
 				total: getTotalPrice(cartItems),
 				fullname: values.name,
+
 				receipt_email: values.email,
 				payment_intent_id: paymentIntentId,
 			}),

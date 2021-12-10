@@ -57,21 +57,16 @@ const options: NextAuthOptions = {
 						);
 
 						token.jwt = data.jwt;
-						token.name = data.user.username;
-						token.email = data.user.email;
 						break;
 
 					default:
 						token.jwt = user.jwt;
-						token.name = user.user.username;
-						token.email = user.user.email;
 				}
 			}
 			return Promise.resolve(token);
 		},
 		session: async (session, user) => {
 			session.jwt = user.jwt;
-			session.id = user.id;
 			return Promise.resolve(session);
 		},
 	},

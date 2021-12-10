@@ -26,6 +26,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 						src={imgSrc}
 						layout='fill'
 						alt='product image'
+						quality={25}
 					/>
 				</div>
 				<h4>{product.title}</h4>
@@ -49,7 +50,7 @@ const Card = styled.div`
 	justify-content: space-between;
 	border-radius: 4px;
 	background-color: #fefefe;
-	border: 1px solid #e9e9e9;
+	/* border: 1px solid #e9e9e9; */
 	box-shadow: 0px 1px 3px 1px #00000018;
 
 	.top {

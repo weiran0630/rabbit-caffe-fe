@@ -7,6 +7,7 @@ module.exports = {
 			'res.cloudinary.com',
 			'rabbit-caffe-be.herokuapp.com',
 			'localhost',
+			'lh3.googleusercontent.com',
 		],
 	},
 	i18n: {

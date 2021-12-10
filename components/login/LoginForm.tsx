@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import { signIn } from 'next-auth/client';

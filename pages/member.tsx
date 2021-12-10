@@ -1,7 +1,10 @@
-import React from 'react';
-import { getSession, useSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { signOut } from 'next-auth/client';
 import { GetServerSidePropsContext } from 'next';
+import Image from 'next/image';
+import type { User, Session } from 'next-auth';
+import placeholderImg from 'public/images/profile_pic_placeholder.webp';
+import styled from '@emotion/styled';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const locale = context.locale || process.env.NEXT_LOCALE;
@@ -17,17 +20,66 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 		};
 	}
 
-	return { props: { session } };
+	const user = await (
+		await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+			headers: {
+				Authorization: `Bearer ${session.jwt}`,
+			},
+		})
+	).json();
+
+	return { props: { user, session } };
 }
 
-export default function Member() {
-	const [session, loading] = useSession();
+interface MemberProps {
+	user: User;
+	session: Session;
+}
+
+export default function Member({ user, session }: MemberProps) {
+	const devEnv = process.env.NODE_ENV === 'development';
+
+	// console.log(user);
+	// console.log(session);
+
+	/**
+	 * @param profilePicture
+	 * TODO:  if database has an user image then use it as profile pic, if doesn't and using oauth provider, use the provider given image, else use a placeholder image
+	 */
+	let profilePicture: string;
+	if (user.profilePicture) {
+		profilePicture = devEnv
+			? `${process.env.NEXT_PUBLIC_API_URL}${user.profilePicture.url}`
+			: user.profilePicture.formats.thumbnail.url;
+	} else if (session.user.image) {
+		profilePicture = session.user.image;
+	} else {
+		profilePicture = placeholderImg.src;
+	}
 
 	return (
-		<div>
-			<p>{session?.user?.email}</p>
-			<p>working in progress..</p>
+		<Container>
+			<p>{user.username}</p>
+			<div className='profile-pic-container'>
+				<Image
+					src={profilePicture}
+					alt='profile-picture'
+					width={100}
+					height={100}
+					layout='responsive'
+				/>
+			</div>
+
 			<button onClick={() => signOut()}>Logout</button>
-		</div>
+		</Container>
 	);
 }
+
+const Container = styled.div`
+	.profile-pic-container {
+		border-radius: 50%;
+		overflow: hidden;
+		width: 10rem;
+		height: 10rem;
+	}
+`;

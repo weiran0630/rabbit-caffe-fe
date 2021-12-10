@@ -39,9 +39,14 @@ export default function FilterBy() {
 			<Separator primary />
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setOriginOpen(!originOpen)}>
-					{t.productsIndex.filter.origin} <AiOutlinePlus />
+					{t.productsIndex.filter.origin}{' '}
+					<AiOutlinePlus
+						className={`close-icon ${
+							(originOpen || placeOriginId) && 'active'
+						}`}
+					/>
 				</h4>
-				<Separator />
+				{/* <Separator /> */}
 				<ul className={`list ${(originOpen || placeOriginId) && 'active'}`}>
 					{placeOrigins?.map(origin => (
 						<li
@@ -75,9 +80,14 @@ export default function FilterBy() {
 
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setRoastLvOpen(!roastLvOpen)}>
-					{t.productsIndex.filter.roastLevel} <AiOutlinePlus />
+					{t.productsIndex.filter.roastLevel}{' '}
+					<AiOutlinePlus
+						className={`close-icon ${
+							(roastLvOpen || roastLevelId) && 'active'
+						}`}
+					/>
 				</h4>
-				<Separator />
+				{/* <Separator /> */}
 				<ul className={`list ${(roastLvOpen || roastLevelId) && 'active'}`}>
 					{roastLevels?.map(level => (
 						<li
@@ -111,9 +121,12 @@ export default function FilterBy() {
 
 			<div className='filter-category'>
 				<h4 className='title' onClick={() => setCompanyOpen(!companyOpen)}>
-					{t.productsIndex.filter.company} <AiOutlinePlus />
+					{t.productsIndex.filter.company}{' '}
+					<AiOutlinePlus
+						className={`close-icon ${(companyOpen || companyId) && 'active'}`}
+					/>
 				</h4>
-				<Separator />
+				{/* <Separator /> */}
 				<ul className={`list ${(companyId || companyOpen) && 'active'}`}>
 					{companies?.map(company => (
 						<li
@@ -165,10 +178,14 @@ const Container = styled.div`
 		width: 100%;
 		cursor: pointer;
 		user-select: none;
-		transition: all 0.05s ease-in-out;
+		transition: all 0.15s linear;
 
 		&:hover {
 			color: black;
+
+			.close-icon.active {
+				transform: rotate(45deg);
+			}
 		}
 	}
 
