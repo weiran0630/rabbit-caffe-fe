@@ -38,7 +38,9 @@ export default function FilterBy() {
 			<h3>{t.productsIndex.filter.heading}</h3>
 			<Separator primary />
 			<div className='filter-category'>
-				<h4 className='title' onClick={() => setOriginOpen(!originOpen)}>
+				<h4
+					className={`title ${(originOpen || placeOriginId) && 'active'}`}
+					onClick={() => setOriginOpen(!originOpen)}>
 					{t.productsIndex.filter.origin}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${
@@ -79,7 +81,9 @@ export default function FilterBy() {
 			</div>
 
 			<div className='filter-category'>
-				<h4 className='title' onClick={() => setRoastLvOpen(!roastLvOpen)}>
+				<h4
+					className={`title ${(roastLvOpen || roastLevelId) && 'active'}`}
+					onClick={() => setRoastLvOpen(!roastLvOpen)}>
 					{t.productsIndex.filter.roastLevel}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${
@@ -120,7 +124,9 @@ export default function FilterBy() {
 			</div>
 
 			<div className='filter-category'>
-				<h4 className='title' onClick={() => setCompanyOpen(!companyOpen)}>
+				<h4
+					className={`title ${(companyOpen || companyId) && 'active'}`}
+					onClick={() => setCompanyOpen(!companyOpen)}>
 					{t.productsIndex.filter.company}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${(companyOpen || companyId) && 'active'}`}
@@ -181,11 +187,19 @@ const Container = styled.div`
 		transition: all 0.15s linear;
 
 		&:hover {
-			color: black;
+			color: inherit;
+		}
 
-			.close-icon.active {
-				transform: rotate(45deg);
-			}
+		&.active {
+			color: inherit;
+		}
+	}
+
+	.close-icon {
+		transition: all 0.15s linear;
+
+		&.active {
+			transform: rotate(45deg);
 		}
 	}
 

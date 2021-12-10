@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import useSWRInfinite from 'swr/infinite';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -37,8 +36,7 @@ export default function ProductList({ initialData }: ProductListProps) {
 							<Loader />
 						</div>
 					}
-					endMessage={<p className='loader'>已列出所有商品</p>}
-					scrollThreshold={0.2}>
+					endMessage={<p className='loader'>已列出所有商品</p>}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}

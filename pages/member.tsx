@@ -2,8 +2,8 @@ import { getSession } from 'next-auth/client';
 import { signOut } from 'next-auth/client';
 import { GetServerSidePropsContext } from 'next';
 import Image from 'next/image';
-import type { User, Session } from 'next-auth';
 import placeholderImg from 'public/images/profile_pic_placeholder.webp';
+import type { User, Session } from 'next-auth';
 import styled from '@emotion/styled';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -39,13 +39,6 @@ interface MemberProps {
 export default function Member({ user, session }: MemberProps) {
 	const devEnv = process.env.NODE_ENV === 'development';
 
-	// console.log(user);
-	// console.log(session);
-
-	/**
-	 * @param profilePicture
-	 * TODO:  if database has an user image then use it as profile pic, if doesn't and using oauth provider, use the provider given image, else use a placeholder image
-	 */
 	let profilePicture: string;
 	if (user.profilePicture) {
 		profilePicture = devEnv

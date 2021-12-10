@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { IoPricetagSharp } from 'react-icons/io5';
@@ -34,8 +33,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
 			<div className='bottom'>
 				<RoastLevelRepresent roastLevel={product.roast_level} />
+
 				<p className='price'>
-					<IoPricetagSharp /> ${product.price} TWD
+					<IoPricetagSharp /> $ {product.price} TWD
 				</p>
 			</div>
 		</Card>
@@ -48,10 +48,6 @@ const Card = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	border-radius: 4px;
-	background-color: #fefefe;
-	/* border: 1px solid #e9e9e9; */
-	box-shadow: 0px 1px 3px 1px #00000018;
 
 	.top {
 		display: flex;
@@ -66,7 +62,6 @@ const Card = styled.div`
 		}
 
 		h4 {
-			font-variant: small-caps;
 			margin: 0 0.5rem;
 		}
 	}

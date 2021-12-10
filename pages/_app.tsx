@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { AppProps } from 'next/app';
 import { Provider as AuthProvider } from 'next-auth/client';
 import { AppContext, contextDefaultValue } from 'context/AppContext';

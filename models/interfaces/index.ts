@@ -41,6 +41,19 @@ export interface Small {
 	provider_metadata: ProviderMetadata;
 }
 
+export interface Large {
+	ext: string;
+	url: string;
+	hash: string;
+	mime: string;
+	name: string;
+	path?: any;
+	size: number;
+	width: number;
+	height: number;
+	provider_metadata: ProviderMetadata;
+}
+
 export interface ProviderMetadata2 {
 	public_id: string;
 	resource_type: string;
@@ -81,6 +94,7 @@ export interface Formats {
 	small: Small;
 	thumbnail: Thumbnail;
 	medium: Medium;
+	large: Large;
 }
 
 export interface ProviderMetadata4 {
@@ -159,7 +173,7 @@ export interface User {
 	blocked?: any;
 	role: Role;
 	address: string;
-	fullname?: any;
+	fullname?: string;
 	created_at: Date;
 	updated_at: Date;
 	profilePicture: IImage;

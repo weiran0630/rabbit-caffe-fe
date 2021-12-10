@@ -26,7 +26,8 @@ export default function CategoryImageContainer() {
 	let categoryHeader = t.header.allSeries;
 
 	if (categories && categoryId) {
-		const url = categories[categoryId - (devEnv ? 2 : 3)].cate_image!.url;
+		const url =
+			categories[categoryId - (devEnv ? 2 : 3)].cate_image!.formats.large.url;
 
 		imgSrc = devEnv ? API_URL + url : url;
 
@@ -41,8 +42,8 @@ export default function CategoryImageContainer() {
 					src={imgSrc!}
 					alt='category image'
 					width='100'
-					height='25'
-					quality={25}
+					height='20'
+					quality={50}
 					layout='responsive'
 					placeholder='blur'
 					blurDataURL={allProductImg.blurDataURL}
@@ -66,8 +67,8 @@ const Container = styled.div`
 
 	.title {
 		font-size: 3rem;
-		color: #fefefed0;
 		position: absolute;
+		color: #fefefed0;
 		left: 50%;
 		top: 50%;
 		transform: translate(-50%, -50%);

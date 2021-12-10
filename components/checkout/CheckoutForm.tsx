@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
 	PaymentElement,
@@ -7,14 +7,14 @@ import {
 } from '@stripe/react-stripe-js';
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
-import { useSession } from 'next-auth/client';
-import type { Session } from 'next-auth';
 import useLocale from 'hooks/useLocale';
 import { AppContext } from 'context/AppContext';
 import { FormStyled } from '@/components/form/FormStyled';
 import { ErrorMessage } from '@/components/form/Message';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { getTotalPrice } from 'functions/cartManipulate';
+import { useSession } from 'next-auth/client';
+import { User } from 'models/interfaces';
 
 interface CheckoutFormProps {
 	paymentIntentId: string;
@@ -23,16 +23,14 @@ interface CheckoutFormProps {
 export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 	const devEnv = process.env.NODE_ENV === 'development';
 	const { locale } = useRouter();
+	const [session] = useSession();
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const t = useLocale();
 	const stripe = useStripe();
 	const elements = useElements();
-	const [session] = useSession();
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const { cartItems } = useContext(AppContext);
-
-	console.log(`https://rabbit-caffe.tw/${locale}`);
 
 	const {
 		handleSubmit,
@@ -84,7 +82,6 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 
 	return (
 		<FormStyled onSubmit={submitOrder}>
-			<h2></h2>
 			<input
 				{...register('name', { required: t.checkout.fullnameRequired })}
 				placeholder={t.checkout.fullname}
@@ -94,7 +91,6 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 			<input
 				{...register('email', {
 					required: t.checkout.emailRequired,
-					value: session?.user?.email,
 					pattern: {
 						value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 						message: t.checkout.emailInvalid,

@@ -1,3 +1,4 @@
+import { User } from 'models/interfaces/index';
 import { createContext } from 'react';
 import { CartItemType, IFilter } from 'models/interfaces';
 
