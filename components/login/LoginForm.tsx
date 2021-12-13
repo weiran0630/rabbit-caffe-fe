@@ -66,7 +66,9 @@ export default function LoginForm() {
 				</Modal>
 			)}
 
-			<FormStyled onSubmit={onSubmit}>
+			<FormStyled
+				onSubmit={onSubmit}
+				onKeyPress={e => e.key === 'Enter' && onSubmit(e)}>
 				<h2>{t.login.title}</h2>
 				<input
 					type='email'

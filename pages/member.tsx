@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const locale = context.locale || process.env.NEXT_LOCALE;
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const session = await getSession(context);
 
 	if (!session) {
@@ -21,7 +22,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 	}
 
 	const user = await (
-		await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+		await fetch(`${API_URL}/users/me`, {
 			headers: {
 				Authorization: `Bearer ${session.jwt}`,
 			},
@@ -38,11 +39,12 @@ interface MemberProps {
 
 export default function Member({ user, session }: MemberProps) {
 	const devEnv = process.env.NODE_ENV === 'development';
+	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 	let profilePicture: string;
 	if (user.profilePicture) {
 		profilePicture = devEnv
-			? `${process.env.NEXT_PUBLIC_API_URL}${user.profilePicture.url}`
+			? `${API_URL}${user.profilePicture.url}`
 			: user.profilePicture.formats.thumbnail.url;
 	} else if (session.user.image) {
 		profilePicture = session.user.image;

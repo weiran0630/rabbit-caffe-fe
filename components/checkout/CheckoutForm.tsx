@@ -22,12 +22,13 @@ interface CheckoutFormProps {
 
 export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 	const devEnv = process.env.NODE_ENV === 'development';
-	const { locale } = useRouter();
-	const [session] = useSession();
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 	const t = useLocale();
 	const stripe = useStripe();
 	const elements = useElements();
+	const { locale } = useRouter();
+	const [session] = useSession();
+	const [user, setUser] = useState<User | null>(null);
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const { cartItems } = useContext(AppContext);
@@ -80,11 +81,25 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 		setIsLoading(false);
 	});
 
+	useEffect(() => {
+		if (session) {
+			fetch(`${API_URL}/users/me`, {
+				headers: { Authorization: `Bearer ${session.jwt}` },
+			})
+				.then(res => res.json())
+				.then(data => {
+					setUser(data);
+					console.log(data);
+				});
+		}
+	}, [session]);
+
 	return (
 		<FormStyled onSubmit={submitOrder}>
 			<input
 				{...register('name', { required: t.checkout.fullnameRequired })}
 				placeholder={t.checkout.fullname}
+				value={user?.fullname}
 			/>
 			{errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
 
@@ -96,12 +111,17 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 						message: t.checkout.emailInvalid,
 					},
 				})}
+				value={user?.email}
 				placeholder={t.checkout.email}
 			/>
 			{errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
 			<input
-				{...register('address', { required: t.checkout.addressRequired })}
+				{...register('address', {
+					required: t.checkout.addressRequired,
+					value: user?.address,
+				})}
+				value={user?.address}
 				placeholder={t.checkout.address}
 			/>
 			{errors.address && <ErrorMessage>{errors.address.message}</ErrorMessage>}
