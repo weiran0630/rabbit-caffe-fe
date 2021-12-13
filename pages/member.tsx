@@ -5,6 +5,7 @@ import Image from 'next/image';
 import placeholderImg from 'public/images/profile_pic_placeholder.webp';
 import type { User, Session } from 'next-auth';
 import styled from '@emotion/styled';
+import Head from 'next/head';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const locale = context.locale || process.env.NEXT_LOCALE;
@@ -54,7 +55,14 @@ export default function Member({ user, session }: MemberProps) {
 
 	return (
 		<Container>
+			<Head>
+				{/**
+				 * TODO: title
+				 */}
+			</Head>
+
 			<p>{user.username}</p>
+
 			<div className='profile-pic-container'>
 				<Image
 					src={profilePicture}

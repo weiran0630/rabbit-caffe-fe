@@ -44,6 +44,7 @@ const options: NextAuthOptions = {
 	],
 	session: {
 		jwt: true,
+		maxAge: 60 * 60, // one hour
 	},
 	callbacks: {
 		jwt: async (token, user, account) => {

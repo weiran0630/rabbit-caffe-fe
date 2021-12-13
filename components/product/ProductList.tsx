@@ -36,7 +36,8 @@ export default function ProductList({ initialData }: ProductListProps) {
 							<Loader />
 						</div>
 					}
-					endMessage={<p className='loader'>已列出所有商品</p>}>
+					endMessage={<p className='loader'>已列出所有商品</p>}
+					scrollThreshold={0.7}>
 					{filteredProducts?.map(product => (
 						<ProductCard product={product} key={product.id} />
 					))}
