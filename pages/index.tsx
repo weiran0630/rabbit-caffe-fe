@@ -8,6 +8,8 @@ import useLocale from 'hooks/useLocale';
 import ButtonLink from '@/components/common/ButtonLink';
 import Modal from '@/components/common/Modal';
 import CheckoutSuccess from '@/components/checkout/CheckoutSuccess';
+import { TiSocialGithub } from 'react-icons/ti';
+import { SiRabbitmq } from 'react-icons/si';
 
 export default function Home() {
 	const router = useRouter();
@@ -43,7 +45,22 @@ export default function Home() {
 							GOOD COFFEE
 						</h2>
 
-						<ButtonLink href='/products'>{t.homepage.button}</ButtonLink>
+						<div
+							style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+							<ButtonLink href='/products'>
+								<GetStarted>
+									<SiRabbitmq size={15} /> {t.homepage.button}
+								</GetStarted>
+							</ButtonLink>
+
+							<GotoSource
+								href='https://github.com/weiran0630/rabbit-caffe-fe'
+								target='_blank'
+								rel='noopener noreferrer'>
+								<TiSocialGithub size={25} />
+								<div className='goto-text'>goto source</div>
+							</GotoSource>
+						</div>
 					</div>
 				</Section>
 
@@ -114,5 +131,33 @@ const ImageContainer = styled.div`
 	@media (max-width: 728px) {
 		width: 100%;
 		height: 90vh;
+	}
+`;
+
+const GetStarted = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+`;
+
+const GotoSource = styled.a`
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 0.1rem;
+	color: #a5a5a5;
+	transition: all 0.05s linear;
+
+	.goto-text {
+		display: inline-block;
+		padding-bottom: 0.2rem;
+	}
+
+	&:hover {
+		color: inherit;
+	}
+
+	@media (max-width: 728px) {
+		color: white;
 	}
 `;

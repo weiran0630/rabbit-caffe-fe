@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/client';
 import { useForm } from 'react-hook-form';
 import { GoogleLoginButton } from 'react-social-login-buttons';
+import { IoLogInSharp } from 'react-icons/io5';
 import { useRouter } from 'next/dist/client/router';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { Separator } from '@/components/common/Separator';
@@ -93,7 +94,12 @@ export default function LoginForm() {
 				{serverError && <ErrorMessage>{t.login.serverError}</ErrorMessage>}
 
 				<CredentialLogin>
-					<ButtonStyled onClick={onSubmit}>{t.login.button}</ButtonStyled>
+					<ButtonStyled onClick={onSubmit}>
+						<div className='login'>
+							<IoLogInSharp size={20} />
+							<div className='login-text'>{t.login.button}</div>
+						</div>
+					</ButtonStyled>
 
 					<Others>
 						<Link href='/register' passHref>
@@ -122,6 +128,18 @@ const CredentialLogin = styled.div`
 	margin: 1.5rem 0 2rem 0;
 	display: flex;
 	justify-content: space-between;
+
+	.login {
+		margin-left: -0.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		align-items: center;
+
+		.login-text {
+			padding-bottom: 1px;
+		}
+	}
 `;
 
 const buttonConfig = {

@@ -8,6 +8,7 @@ import styled from '@emotion/styled';
 import Markdown from 'react-markdown';
 import { IoArrowBackSharp } from 'react-icons/io5';
 import { FcCheckmark } from 'react-icons/fc';
+import { BsCartPlusFill } from 'react-icons/bs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fetcher from 'functions/fetcher';
@@ -131,7 +132,10 @@ export default function ProductDetailsPage({
 								setCartItems(handleAddToCart(product, previousCart));
 								notifyAddItem();
 							}}>
-							{t.productDetails.addToCart}
+							<AddtoCart>
+								<BsCartPlusFill size={17} />
+								{t.productDetails.addToCart}
+							</AddtoCart>
 						</ButtonStyled>
 
 						<h4 className='description'>{t.productDetails.unit}：</h4>
@@ -242,4 +246,10 @@ const Info = styled.div`
 		font-size: 0.9rem;
 		/* margin-bottom: 2rem; */
 	}
+`;
+
+const AddtoCart = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 `;
