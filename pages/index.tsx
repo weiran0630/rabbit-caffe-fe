@@ -102,7 +102,7 @@ const Section = styled.section`
 	div h2 {
 		margin-bottom: 1rem;
 		user-select: none;
-		font-family: 'Staatliches', cursive;
+		font-family: 'Noto Sans TC';
 		font-size: 4rem;
 		cursor: default;
 	}

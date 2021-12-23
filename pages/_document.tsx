@@ -21,6 +21,7 @@ class MyDocument extends Document {
 					<link
 						href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Staatliches&display=swap'
 						rel='stylesheet'
+						as='font'
 						crossOrigin='anonymous'
 					/>
 
