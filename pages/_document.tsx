@@ -15,7 +15,10 @@ class MyDocument extends Document {
 		return (
 			<Html>
 				<Head>
-					<link rel='preconnect' href='https://fonts.googleapis.com' />
+					<link
+						rel='preconnect'
+						href='https://fonts.googleapis.com'
+					/>
 					<link rel='preconnect' href='https://fonts.gstatic.com' />
 
 					<link
@@ -28,6 +31,10 @@ class MyDocument extends Document {
 					<meta
 						name='description'
 						content='Rabbit-themed coffee shop e-commerce website created with Next.js. Only for education propose, open sourced on Github.'
+					/>
+					<meta
+						name='google-site-verification'
+						content='Hz2MK9OCbfxyw3u1A395hq2JPGUgTFn7NH3OVUcpUzo'
 					/>
 				</Head>
 				<body>
