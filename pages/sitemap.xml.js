@@ -5,26 +5,26 @@ function generateSiteMap(products) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://rabbit-caffe.tw/</loc>
+       <loc>https://rabbit-caffe.vercel.app/</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.tw/products</loc>
+       <loc>https://rabbit-caffe.vercel.app/</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.tw/login</loc>
+       <loc>https://rabbit-caffe.vercel.app/</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.tw/register</loc>
+       <loc>https://rabbit-caffe.vercel.app/</loc>
      </url>
      ${products
-				.map(({ id }) => {
-					return `
+			.map(({ id }) => {
+				return `
        <url>
-           <loc>${`https://rabbit-caffe.tw/products/${id}`}</loc>
+           <loc>${`https://rabbit-caffe.vercel.app/${id}`}</loc>
        </url>
      `;
-				})
-				.join('')}
+			})
+			.join('')}
    </urlset>
  `;
 }
