@@ -8,13 +8,13 @@ function generateSiteMap(products) {
        <loc>https://rabbit-caffe.vercel.app/</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.vercel.app/</loc>
+       <loc>https://rabbit-caffe.vercel.app/products</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.vercel.app/</loc>
+       <loc>https://rabbit-caffe.vercel.app/login</loc>
      </url>
      <url>
-       <loc>https://rabbit-caffe.vercel.app/</loc>
+       <loc>https://rabbit-caffe.vercel.app/register</loc>
      </url>
      ${products
 			.map(({ id }) => {
