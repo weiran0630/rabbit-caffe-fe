@@ -20,7 +20,7 @@ function generateSiteMap(products) {
 			.map(({ id }) => {
 				return `
        <url>
-           <loc>${`https://rabbit-caffe.vercel.app/${id}`}</loc>
+           <loc>${`https://rabbit-caffe.vercel.app/products/${id}`}</loc>
        </url>
      `;
 			})
