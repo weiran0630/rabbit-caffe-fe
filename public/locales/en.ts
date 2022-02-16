@@ -73,6 +73,8 @@ export const en = {
 		totalPrice: 'Total price',
 	},
 	checkout: {
+		statement:
+			'***This website is only a proof of concept, does not provide any goods and services, please do not use any real personal information.***',
 		checkoutTitle: 'Payment and shipping',
 		fullname: 'Full name',
 		email: 'Email address',

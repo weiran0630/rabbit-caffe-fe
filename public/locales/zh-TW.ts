@@ -70,6 +70,8 @@ export const zhTW = {
 		totalPrice: '總金額',
 	},
 	checkout: {
+		statement:
+			'***此網站僅作爲概念證明，並不提供任何商品購買服務，請勿使用真實個人資料，以免造成損失。***',
 		checkoutTitle: '付款與運輸',
 		fullname: '姓名 Full name',
 		email: '電郵 Email',

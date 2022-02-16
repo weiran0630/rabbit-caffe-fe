@@ -72,6 +72,8 @@ export const ja = {
 		totalPrice: '合計金額',
 	},
 	checkout: {
+		statement:
+			'このウェブサイトは概念実証に過ぎず、商品やサービスを提供するものではありません。実際の個人情報は使用しないでください。',
 		checkoutTitle: '支払いと配送',
 		fullname: '名前',
 		email: '電子メール',

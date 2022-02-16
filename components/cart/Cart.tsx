@@ -97,7 +97,7 @@ export default function Cart() {
 							</p>
 						</div>
 					</div>
-
+					<div className='statement'>{t.checkout.statement}</div>
 					<Checkout total={getTotalPrice(cartItems)} />
 				</>
 			) : (
@@ -125,6 +125,13 @@ const Container = styled.div`
 		justify-content: center;
 		align-items: center;
 		margin: 3rem 0;
+	}
+
+	.statement {
+		margin: auto;
+		color: red;
+		display: inline-block;
+		inline-size: 22rem;
 	}
 
 	table {
