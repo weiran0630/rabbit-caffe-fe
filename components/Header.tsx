@@ -152,7 +152,7 @@ const HeaderStyled = styled.div`
 		user-select: none;
 		text-align: center;
 		font-size: 3rem;
-		font-family: 'Noto Sans TC';
+		font-family: sans-serif;
 		font-weight: 100;
 
 		&:hover {
