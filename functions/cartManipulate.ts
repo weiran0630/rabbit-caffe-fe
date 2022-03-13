@@ -2,7 +2,7 @@ import type { CartItemType, IProduct } from 'models/interfaces';
 
 export const handleAddToCart = (
 	clickedItem: IProduct,
-	previousCart: CartItemType[]
+	previousCart: CartItemType[] = []
 ) => {
 	const isItemInCart = previousCart.find(item => item.id === clickedItem.id);
 	let currentCart;
@@ -22,7 +22,10 @@ export const handleAddToCart = (
 	return currentCart;
 };
 
-export const handleAddAmount = (id: number, previousCart: CartItemType[]) => {
+export const handleAddAmount = (
+	id: number,
+	previousCart: CartItemType[] = []
+) => {
 	const currentCart = previousCart.reduce((accumulator, item) => {
 		// for the item that is clicked on
 		if (item.id === id) {
@@ -62,7 +65,7 @@ export const handleReduceAmount = (
 	return currentCart;
 };
 
-export const getTotalPrice = (cartItems: CartItemType[]) => {
+export const getTotalPrice = (cartItems: CartItemType[] = []) => {
 	return cartItems.reduce(
 		(accumulator, item) => (accumulator += item.price * item.amount),
 		0

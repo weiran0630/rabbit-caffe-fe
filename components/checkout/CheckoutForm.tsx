@@ -8,7 +8,7 @@ import {
 import styled from '@emotion/styled';
 import { useForm } from 'react-hook-form';
 import useLocale from 'hooks/useLocale';
-import { AppContext } from 'context/AppContext';
+import { useCart } from 'context/CartContext';
 import { FormStyled } from '@/components/form/FormStyled';
 import { ErrorMessage } from '@/components/form/Message';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
@@ -31,7 +31,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 	const [user, setUser] = useState<User | null>(null);
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const { cartItems } = useContext(AppContext);
+	const { cartItems } = useCart();
 
 	const {
 		handleSubmit,
@@ -133,7 +133,8 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 
 			<ButtonStyled
 				onClick={submitOrder}
-				isDisable={isLoading || !stripe || !elements || !errors}>
+				isDisable={isLoading || !stripe || !elements || !errors}
+			>
 				{t.checkout.button}
 			</ButtonStyled>
 		</FormStyled>

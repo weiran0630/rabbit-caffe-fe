@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import useLocale from 'hooks/useLocale';
-import { AppContext } from 'context/AppContext';
+import { useCart } from 'context/CartContext';
 import {
 	getTotalPrice,
 	handleAddAmount,
@@ -16,7 +16,7 @@ export default function Cart() {
 	const devEnv = process.env.NODE_ENV === 'development';
 	const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-	const { cartItems, setCartItems } = useContext(AppContext);
+	const { cartItems, setCartItems } = useCart();
 
 	return (
 		<Container>
@@ -69,14 +69,16 @@ export default function Cart() {
 											<span
 												onClick={() =>
 													setCartItems(handleAddAmount(item.id, cartItems))
-												}>
+												}
+											>
 												<AiOutlinePlus className='button' size={13} />
 											</span>
 											<span className='actual-no'>{item.amount}</span>
 											<span
 												onClick={() =>
 													setCartItems(handleReduceAmount(item.id, cartItems))
-												}>
+												}
+											>
 												<AiOutlineMinus className='button' size={13} />
 											</span>
 										</div>

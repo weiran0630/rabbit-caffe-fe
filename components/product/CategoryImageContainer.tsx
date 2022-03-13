@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import useSWRImmutable from 'swr/immutable';
 import useLocale from 'hooks/useLocale';
 import { ICategory } from 'models/interfaces';
-import { AppContext } from 'context/AppContext';
+import { useFilter } from 'context/FilterContext';
 import fetcher from 'functions/fetcher';
 import allProductImg from 'public/images/all-products.webp';
 
@@ -15,7 +15,7 @@ export default function CategoryImageContainer() {
 
 	const {
 		filter: { categoryId },
-	} = useContext(AppContext);
+	} = useFilter();
 
 	const { data: categories } = useSWRImmutable<ICategory[]>(
 		'/categories',

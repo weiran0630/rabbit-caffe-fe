@@ -3,7 +3,7 @@ import useSWRImmutable from 'swr/immutable';
 import styled from '@emotion/styled';
 import { AiOutlinePlus } from 'react-icons/ai';
 import fetcher from 'functions/fetcher';
-import { AppContext } from 'context/AppContext';
+import { useFilter } from 'context/FilterContext';
 import { ICompany, IPlaceOrigin, IRoastLevel } from 'models/interfaces';
 import { Separator } from '@/components/common/Separator';
 import useLocale from 'hooks/useLocale';
@@ -27,7 +27,7 @@ export default function FilterBy() {
 	const {
 		filter: { companyId, placeOriginId, roastLevelId, ...filter },
 		setFilter,
-	} = useContext(AppContext);
+	} = useFilter();
 
 	const [originOpen, setOriginOpen] = useState(false);
 	const [roastLvOpen, setRoastLvOpen] = useState(false);
@@ -40,7 +40,8 @@ export default function FilterBy() {
 			<div className='filter-category'>
 				<h4
 					className={`title ${(originOpen || placeOriginId) && 'active'}`}
-					onClick={() => setOriginOpen(!originOpen)}>
+					onClick={() => setOriginOpen(!originOpen)}
+				>
 					{t.productsIndex.filter.origin}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${
@@ -61,7 +62,8 @@ export default function FilterBy() {
 									roastLevelId,
 									...filter,
 								})
-							}>
+							}
+						>
 							{origin.place_name}
 						</li>
 					))}
@@ -74,7 +76,8 @@ export default function FilterBy() {
 								roastLevelId,
 								...filter,
 							})
-						}>
+						}
+					>
 						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>
@@ -83,7 +86,8 @@ export default function FilterBy() {
 			<div className='filter-category'>
 				<h4
 					className={`title ${(roastLvOpen || roastLevelId) && 'active'}`}
-					onClick={() => setRoastLvOpen(!roastLvOpen)}>
+					onClick={() => setRoastLvOpen(!roastLvOpen)}
+				>
 					{t.productsIndex.filter.roastLevel}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${
@@ -104,7 +108,8 @@ export default function FilterBy() {
 									placeOriginId,
 									...filter,
 								})
-							}>
+							}
+						>
 							{level.level}
 						</li>
 					))}
@@ -117,7 +122,8 @@ export default function FilterBy() {
 								placeOriginId,
 								...filter,
 							})
-						}>
+						}
+					>
 						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>
@@ -126,7 +132,8 @@ export default function FilterBy() {
 			<div className='filter-category'>
 				<h4
 					className={`title ${(companyOpen || companyId) && 'active'}`}
-					onClick={() => setCompanyOpen(!companyOpen)}>
+					onClick={() => setCompanyOpen(!companyOpen)}
+				>
 					{t.productsIndex.filter.company}{' '}
 					<AiOutlinePlus
 						className={`close-icon ${(companyOpen || companyId) && 'active'}`}
@@ -145,7 +152,8 @@ export default function FilterBy() {
 									roastLevelId,
 									...filter,
 								})
-							}>
+							}
+						>
 							{company.com_name}
 						</li>
 					))}
@@ -158,7 +166,8 @@ export default function FilterBy() {
 								placeOriginId,
 								...filter,
 							})
-						}>
+						}
+					>
 						{t.productsIndex.filter.cancelSelection}
 					</li>
 				</ul>

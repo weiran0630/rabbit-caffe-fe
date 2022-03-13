@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
-import { AppContext } from 'context/AppContext';
+import { useFilter } from 'context/FilterContext';
 import useSWRImmutable from 'swr/immutable';
 import fetcher from 'functions/fetcher';
 import { ICategory } from 'models/interfaces';
@@ -12,7 +12,7 @@ export default function ProductHeader() {
 	const {
 		filter: { categoryId, ...filter },
 		setFilter,
-	} = useContext(AppContext);
+	} = useFilter();
 
 	const { data: categories } = useSWRImmutable<ICategory[]>(
 		'/categories',
@@ -23,14 +23,16 @@ export default function ProductHeader() {
 		<Container>
 			<span
 				className={`clickable ${categoryId === null ? 'active' : ''}`}
-				onClick={() => setFilter({ ...filter, categoryId: null })}>
+				onClick={() => setFilter({ ...filter, categoryId: null })}
+			>
 				{t.header.allSeries}
 			</span>
 			{categories?.map(category => (
 				<span
 					className={`clickable ${categoryId === category.id ? 'active' : ''}`}
 					onClick={() => setFilter({ ...filter, categoryId: category.id })}
-					key={category.id}>
+					key={category.id}
+				>
 					{category.cate_name}
 				</span>
 			))}

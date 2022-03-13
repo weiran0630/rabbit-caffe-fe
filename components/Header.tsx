@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
@@ -14,7 +14,7 @@ import {
 import ProductHeader from '@/components/product/ProductHeader';
 import Modal from './common/Modal';
 import Cart from './cart/Cart';
-import { AppContext } from 'context/AppContext';
+import { useCart } from 'context/CartContext';
 import { CartItemType } from 'models/interfaces';
 import useLocale from 'hooks/useLocale';
 import I18nSwitcher from './I18nSwitcher';
@@ -25,9 +25,9 @@ export default function Header() {
 	const [session, _] = useSession();
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [isSwitchLangOpen, setIsSwitchLang] = useState(false);
-	const { cartItems } = useContext(AppContext);
+	const { cartItems } = useCart();
 
-	const getTotalAmount = (allItems: CartItemType[]) => {
+	const getTotalAmount = (allItems: CartItemType[] = []) => {
 		return allItems.reduce(
 			(accumulator, item) => (accumulator += item.amount),
 			0
@@ -92,12 +92,14 @@ export default function Header() {
 
 					<span
 						className='clickable'
-						onClick={() => setIsCartOpen(!isCartOpen)}>
+						onClick={() => setIsCartOpen(!isCartOpen)}
+					>
 						<span
 							className={`has-badge ${
 								getTotalAmount(cartItems) > 0 && 'active'
 							}`}
-							data-count={getTotalAmount(cartItems)}>
+							data-count={getTotalAmount(cartItems)}
+						>
 							<IoCartSharp size={20} />
 						</span>
 
@@ -106,7 +108,8 @@ export default function Header() {
 
 					<span
 						className='clickable'
-						onClick={() => setIsSwitchLang(!isSwitchLangOpen)}>
+						onClick={() => setIsSwitchLang(!isSwitchLangOpen)}
+					>
 						<MdOutlineLanguage size={20} />
 						<span>{t.header.switchLang}</span>
 					</span>

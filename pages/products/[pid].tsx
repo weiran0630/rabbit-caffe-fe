@@ -12,7 +12,7 @@ import { BsCartPlusFill } from 'react-icons/bs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import fetcher from 'functions/fetcher';
-import { AppContext } from 'context/AppContext';
+import { useCart } from 'context/CartContext';
 import { IProduct } from 'models/interfaces';
 import { handleAddToCart } from 'functions/cartManipulate';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
@@ -63,13 +63,15 @@ interface IParams extends ParsedUrlQuery {
 	pid: string;
 }
 
-export const getStaticProps: GetStaticProps<GetStaticPropsType, IParams> =
-	async ctx => {
-		const params = ctx.params!;
-		const product = await fetcher<IProduct>(`/products/${params.pid}`);
+export const getStaticProps: GetStaticProps<
+	GetStaticPropsType,
+	IParams
+> = async ctx => {
+	const params = ctx.params!;
+	const product = await fetcher<IProduct>(`/products/${params.pid}`);
 
-		return { props: { product }, revalidate: 20 };
-	};
+	return { props: { product }, revalidate: 20 };
+};
 
 export default function ProductDetailsPage({
 	product,
@@ -81,7 +83,7 @@ export default function ProductDetailsPage({
 
 	const imgSrc = devEnv ? API_URL + product.image[0].url : product.image[0].url;
 
-	const { cartItems: previousCart, setCartItems } = useContext(AppContext);
+	const { cartItems: previousCart, setCartItems } = useCart();
 
 	const notifyAddItem = () =>
 		toast(t.productDetails.toast, {
@@ -131,7 +133,8 @@ export default function ProductDetailsPage({
 							onClick={() => {
 								setCartItems(handleAddToCart(product, previousCart));
 								notifyAddItem();
-							}}>
+							}}
+						>
 							<AddtoCart>
 								<BsCartPlusFill size={17} />
 								{t.productDetails.addToCart}

@@ -1,5 +1,4 @@
-import { AppContext } from '../context/AppContext';
-import { useContext } from 'react';
+import { useFilter } from '../context/FilterContext';
 import { IProduct } from './../models/interfaces/index';
 
 export default function useFilteredProducts(
@@ -7,7 +6,7 @@ export default function useFilteredProducts(
 ): IProduct[] | undefined {
 	const {
 		filter: { categoryId, companyId, placeOriginId, roastLevelId, searchTerm },
-	} = useContext(AppContext);
+	} = useFilter();
 
 	if (!allProducts) return undefined;
 
