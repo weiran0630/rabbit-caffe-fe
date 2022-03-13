@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
 import { ErrorMessage } from '@/components/form/Message';
@@ -15,6 +15,7 @@ interface RegisterFormValues {
 	username: string;
 	email: string;
 	password: string;
+	confirm: string;
 	birthday: Date;
 }
 
@@ -29,9 +30,9 @@ export default function RegisterForm() {
 		handleSubmit,
 		getValues,
 		formState: { errors },
-	} = useForm();
+	} = useForm<RegisterFormValues>();
 
-	const onSubmit = async (values: RegisterFormValues) => {
+	const onSubmit: SubmitHandler<RegisterFormValues> = async values => {
 		try {
 			const response = await axios.post(`${API_URL}/auth/local/register`, {
 				...values,

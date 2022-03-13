@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import { ButtonStyled } from '@/components/common/ButtonStyled';
@@ -20,12 +20,12 @@ export default function ForgotPasswordForm() {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
+	} = useForm<ForgotPasswordFormValues>();
 
-	const onSubmit = async ({ email }: ForgotPasswordFormValues) => {
+	const onSubmit: SubmitHandler<ForgotPasswordFormValues> = async data => {
 		setIsLoading(true);
 		try {
-			await axios.post(`${API_URL}/auth/forgot-password`, { email });
+			await axios.post(`${API_URL}/auth/forgot-password`, data.email);
 			setServerError(false);
 			setIsSuccess(true);
 			setIsLoading(false);
@@ -66,7 +66,8 @@ export default function ForgotPasswordForm() {
 					<ButtonStyled
 						isDisable={isSuccess}
 						isLoading={isLoading}
-						onClick={handleSubmit(onSubmit)}>
+						onClick={handleSubmit(onSubmit)}
+					>
 						{isLoading ? '發送中' : '重設密碼'}
 					</ButtonStyled>
 				</div>

@@ -30,12 +30,12 @@ export default function LoginForm() {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
+	} = useForm<LoginFormValues>();
 	const router = useRouter();
 
 	const onSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		await handleSubmit(async (values: LoginFormValues) => {
+		await handleSubmit(async values => {
 			const response = await signIn('credentials', {
 				...values,
 				redirect: false,
@@ -69,7 +69,8 @@ export default function LoginForm() {
 
 			<FormStyled
 				onSubmit={onSubmit}
-				onKeyPress={e => e.key === 'Enter' && onSubmit(e)}>
+				onKeyPress={e => e.key === 'Enter' && onSubmit(e)}
+			>
 				<h2>{t.login.title}</h2>
 				<input
 					type='email'
@@ -116,7 +117,8 @@ export default function LoginForm() {
 				<GoogleLoginButton
 					onClick={() => signIn('google')}
 					iconSize='1rem'
-					style={buttonConfig}>
+					style={buttonConfig}
+				>
 					{t.login.googleLogin}
 				</GoogleLoginButton>
 			</FormStyled>
