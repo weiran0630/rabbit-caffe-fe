@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
 	PaymentElement,
@@ -66,7 +66,7 @@ export default function CheckoutForm({ paymentIntentId }: CheckoutFormProps) {
 			confirmParams: {
 				return_url: devEnv
 					? `http://localhost:3000/${locale}`
-					: `https://rabbit-caffe.tw/${locale}`,
+					: `https://rabbit-caffe.vercel.app/${locale}`,
 				receipt_email: values.email,
 				shipping: { address: { line1: values.address }, name: values.name },
 			},

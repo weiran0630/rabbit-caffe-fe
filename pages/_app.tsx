@@ -6,14 +6,6 @@ import Header from '@/components/Header';
 import { CartProvider } from 'context/CartContext';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-	// useEffect(() => {
-	// 	const cartItemsData = JSON.parse(localStorage.getItem('cart') || '[]');
-
-	// 	if (cartItemsData) {
-	// 		setCartItems(cartItemsData);
-	// 	}
-	// }, []);
-
 	return (
 		<AuthProvider session={pageProps.session}>
 			<GlobalStyles />
